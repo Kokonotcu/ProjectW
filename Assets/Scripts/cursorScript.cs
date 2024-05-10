@@ -10,6 +10,8 @@ public class cursorScript : MonoBehaviour
 	Transform otherTransform;
 	MouseBehaviour mouseBehaviour;
 
+	Vector3 diffBetweenMouseNCard;
+
 	public enum MouseBehaviour 
 	{
 		hovering,
@@ -29,23 +31,41 @@ public class cursorScript : MonoBehaviour
 		transform.position = Camera.main.ScreenToWorldPoint(cursorPosition);
 	}
 
-	public void ClickAndDrag() 
+	public void ClickAndRelease() 
 	{
-		if (Input.GetMouseButtonDown(0))
+		if (Input.GetMouseButtonDown(0) && other!= null && other.gameObject.tag == "Cards")
 		{
 			mouseBehaviour = MouseBehaviour.dragging;
-			other.gameObject.tag = "Cards";
+			diffBetweenMouseNCard = transform.position - other.transform.position;
 			Debug.Log('s');
+		}
+		else if (Input.GetMouseButtonUp(0)) 
+		{
+			mouseBehaviour = MouseBehaviour.released;
+		}
+		else 
+		{
+			Debug.Log('a');
+		}
+	}
+
+	public void Drag()
+	{
+		if (mouseBehaviour == MouseBehaviour.dragging)
+		{
+			other.transform.position = transform.position - diffBetweenMouseNCard;
 		}
 	}
 
 	private void OnCollisionEnter2D(Collision2D collision)
 	{
-		other = collision.otherCollider;
+		other = collision.collider;
+		mouseBehaviour = MouseBehaviour.hovering;
 	}
 
 	private void OnCollisionExit2D(Collision2D collision)
 	{
 		other = null;
+		mouseBehaviour = MouseBehaviour.released;
 	}
 }

@@ -10,6 +10,7 @@ public class GameManager : MonoBehaviour
     void Update()
     {
         cursor.SetCursorPos();
-        cursor.ClickAndDrag();
+        cursor.ClickAndRelease();
+        cursor.Drag();
     }
 }
