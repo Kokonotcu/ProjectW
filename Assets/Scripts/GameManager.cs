@@ -10,25 +10,38 @@ public class GameManager : MonoBehaviour
 	float cardNum = 1;
 	[SerializeField]
 	List<CardManager> allCards = new List<CardManager>();
-
-	//Mouse possessing this object
-	Collider2D other;
+	[SerializeField]
+	GameObject deck;
 
 
 	void Update()
     {
-		CursorUpdate(out other);
+		CursorUpdate();
 		foreach (var card in allCards)
 		{
 			card.UpdateCardPos();
 		}
     }
 
-	void CursorUpdate(out Collider2D other) 
+	void CursorUpdate() 
 	{
 		cursor.SetCursorPos();
 		cursor.ClickAndRelease();
-		cursor.Drag(out other);
+		if (cursor.mouseBehaviour == cursorScript.MouseBehaviour.released) 
+		{
+			foreach (var card in allCards)
+			{
+				card.SetTarget(deck.transform);
+			}
+			cursor.mouseBehaviour = cursorScript.MouseBehaviour.hovering;
+		}
+		else if (cursor.mouseBehaviour == cursorScript.MouseBehaviour.dragging)
+		{
+			foreach (var card in allCards)
+			{
+				card.SetTarget(cursor.transform);
+			}
+		}
 	}
 
 

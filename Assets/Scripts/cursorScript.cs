@@ -6,22 +6,14 @@ using UnityEngine;
 public class cursorScript : MonoBehaviour
 {
     Vector3 cursorPosition;
-	Collider2D collision, other;
-	Transform otherTransform;
-	MouseBehaviour mouseBehaviour;
-
-	Vector3 diffBetweenMouseNCard;
+	Collider2D other;
+	public MouseBehaviour mouseBehaviour;
 
 	public enum MouseBehaviour 
 	{
 		hovering,
 		dragging,
 		released
-	}
-
-	private void Awake()
-	{
-		collision = GetComponent<Collider2D>();
 	}
 
 	public void SetCursorPos()
@@ -33,28 +25,16 @@ public class cursorScript : MonoBehaviour
 
 	public void ClickAndRelease() 
 	{
-		if (Input.GetMouseButtonDown(0) && other!= null && other.gameObject.tag == "Cards")
+		if (Input.GetMouseButton(0) && 
+			other != null &&
+			other.gameObject.tag == "Cards")
 		{
 			mouseBehaviour = MouseBehaviour.dragging;
-			diffBetweenMouseNCard = transform.position - other.transform.position;
-			Debug.Log('s');
 		}
-		else if (Input.GetMouseButtonUp(0)) 
+		else if ((Input.GetMouseButtonUp(0))) 
 		{
 			mouseBehaviour = MouseBehaviour.released;
-		}
-		else 
-		{
-			Debug.Log('a');
-		}
-	}
-
-	public void Drag(out Collider2D other1)
-	{
-		other1 = other;
-		if (mouseBehaviour == MouseBehaviour.dragging)
-		{
-			other.transform.position = transform.position - diffBetweenMouseNCard;
+			other = null;
 		}
 	}
 
@@ -66,7 +46,5 @@ public class cursorScript : MonoBehaviour
 
 	private void OnTriggerExit2D(Collider2D collision)
 	{
-		other = null;
-		mouseBehaviour = MouseBehaviour.released;
 	}
 }

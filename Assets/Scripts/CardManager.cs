@@ -9,7 +9,6 @@ public class CardManager : MonoBehaviour
     [SerializeField]
     float cardSnapSpeed;
 
-
 	void Start()
     {
         transform.position = target.position;
@@ -19,6 +18,11 @@ public class CardManager : MonoBehaviour
     {
         Vector3 diff = target.position - transform.position;
         Vector3 direction = diff.normalized;
-        transform.position += direction * Mathf.Pow(diff.magnitude, 2) * Time.deltaTime * cardSnapSpeed ;
+        transform.position += direction * Mathf.Pow(diff.magnitude, 1) * Time.deltaTime * cardSnapSpeed ;
+    }
+
+    public void SetTarget(Transform tar) 
+    {
+		target = tar;
     }
 }
