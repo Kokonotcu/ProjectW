@@ -49,21 +49,22 @@ public class cursorScript : MonoBehaviour
 		}
 	}
 
-	public void Drag()
+	public void Drag(out Collider2D other1)
 	{
+		other1 = other;
 		if (mouseBehaviour == MouseBehaviour.dragging)
 		{
 			other.transform.position = transform.position - diffBetweenMouseNCard;
 		}
 	}
 
-	private void OnCollisionEnter2D(Collision2D collision)
+	private void OnTriggerEnter2D(Collider2D collision)
 	{
-		other = collision.collider;
+		other = collision;
 		mouseBehaviour = MouseBehaviour.hovering;
 	}
 
-	private void OnCollisionExit2D(Collision2D collision)
+	private void OnTriggerExit2D(Collider2D collision)
 	{
 		other = null;
 		mouseBehaviour = MouseBehaviour.released;

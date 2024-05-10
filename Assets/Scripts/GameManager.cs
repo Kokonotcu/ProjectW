@@ -4,13 +4,16 @@ using UnityEngine;
 
 public class GameManager : MonoBehaviour
 {
-    [SerializeField]
-    cursorScript cursor;
+	[SerializeField]
+	cursorScript cursor;
 
-    void Update()
+	//Mouse possessing this object
+	Collider2D other;
+
+	void Update()
     {
         cursor.SetCursorPos();
-        cursor.ClickAndRelease();
-        cursor.Drag();
+		cursor.ClickAndRelease();
+		cursor.Drag(out other);
     }
 }
