@@ -8,6 +8,7 @@ public class dead : MonoBehaviour
     void Start()
     {
         Debug.Log("rüzxgarý sikkkkk");
+        Debug.Log("rüzgar timessss");
     }
 
     // Update is called once per frame
