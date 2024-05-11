@@ -30,7 +30,7 @@ public class characterMovement : MonoBehaviour
     void Update()
     {
         animator.SetFloat("yVelocity", rb.velocity.y);
-        animator.SetFloat("speed", Mathf.Abs(horizontal)*speed);
+        animator.SetFloat("speed",  Mathf.Abs(rb.velocity.x) * speed );
 
         horizontal = Input.GetAxisRaw("Horizontal");
 

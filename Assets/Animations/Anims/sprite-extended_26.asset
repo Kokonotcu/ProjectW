@@ -11,12 +11,12 @@ Sprite:
     serializedVersion: 2
     x: 69
     y: 104
-    width: 19
+    width: 28
     height: 21
-  m_Offset: {x: 9.5, y: 0}
+  m_Offset: {x: 0, y: -10.5}
   m_Border: {x: 0, y: 0, z: 0, w: 0}
   m_PixelsToUnits: 32
-  m_Pivot: {x: 1, y: 0.5}
+  m_Pivot: {x: 0.5, y: 0}
   m_Extrude: 1
   m_IsPolygon: 0
   m_AtlasName: 
@@ -103,18 +103,18 @@ Sprite:
         format: 0
         dimension: 0
       m_DataSize: 80
-      _typelessdata: 000018bf0000a83e00000000000000000000a83e00000000000018bf0000a8be00000000000000000000a8be000000000000000000000000000000000000000000000000000000000000000000000000
+      _typelessdata: 0000e0be0000283f000000000000e03e0000283f000000000000e0be00000000000000000000e03e0000000000000000cdcc5c3e0000fa3e33339b3e0000fa3ecdcc5c3e0000d03e33339b3e0000d03e
     m_Bindpose: []
     textureRect:
       serializedVersion: 2
       x: 69
       y: 104
-      width: 19
+      width: 28
       height: 21
     textureRectOffset: {x: 0, y: 0}
     atlasRectOffset: {x: -1, y: -1}
     settingsRaw: 64
-    uvTransform: {x: 32, y: 88, z: 32, w: 114.5}
+    uvTransform: {x: 32, y: 83, z: 32, w: 104}
     downscaleMultiplier: 1
   m_AtlasRD:
     serializedVersion: 3
@@ -194,26 +194,28 @@ Sprite:
         format: 0
         dimension: 0
       m_DataSize: 80
-      _typelessdata: 000018bf0000a83e00000000000000000000a83e00000000000018bf0000a8be00000000000000000000a8be000000000000000000000000000000000000000000000000000000000000000000000000
+      _typelessdata: 0000e0be0000283f000000000000e03e0000283f000000000000e0be00000000000000000000e03e0000000000000000cdcc5c3e0000fa3e33339b3e0000fa3ecdcc5c3e0000d03e33339b3e0000d03e
     m_Bindpose: []
     textureRect:
       serializedVersion: 2
       x: 69
       y: 104
-      width: 19
+      width: 28
       height: 21
     textureRectOffset: {x: 0, y: 0}
     atlasRectOffset: {x: -1, y: -1}
     settingsRaw: 64
-    uvTransform: {x: 32, y: 88, z: 32, w: 114.5}
+    uvTransform: {x: 32, y: 83, z: 32, w: 104}
     downscaleMultiplier: 1
   m_PhysicsShape:
-  - - {x: -0.59375, y: 0.328125}
-    - {x: -0.59375, y: 0.046875}
-    - {x: -0.46875, y: -0.203125}
-    - {x: -0.34375, y: -0.328125}
-    - {x: 0, y: -0.328125}
-    - {x: 0, y: 0.171875}
-    - {x: -0.21875, y: 0.328125}
+  - - {x: -0.0625, y: 0.65625}
+    - {x: -0.4375, y: 0.65625}
+    - {x: -0.4375, y: 0.375}
+    - {x: -0.3125, y: 0.125}
+    - {x: -0.1875, y: 0}
+    - {x: 0.1875, y: 0}
+    - {x: 0.21875, y: 0.03125}
+    - {x: 0.21875, y: 0.40625}
+    - {x: 0.125, y: 0.625}
   m_Bones: []
   m_SpriteID: c2217a15550e8bd4da1e4cea9cea02af

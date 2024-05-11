@@ -11,12 +11,12 @@ Sprite:
     serializedVersion: 2
     x: 227
     y: 69
-    width: 25
+    width: 31
     height: 21
-  m_Offset: {x: 12.5, y: 0}
+  m_Offset: {x: 0, y: -10.5}
   m_Border: {x: 0, y: 0, z: 0, w: 0}
   m_PixelsToUnits: 32
-  m_Pivot: {x: 1, y: 0.5}
+  m_Pivot: {x: 0.5, y: 0}
   m_Extrude: 1
   m_IsPolygon: 0
   m_AtlasName: 
@@ -103,18 +103,18 @@ Sprite:
         format: 0
         dimension: 0
       m_DataSize: 80
-      _typelessdata: 000048bf0000a83e00000000000000000000a83e00000000000048bf0000a8be00000000000000000000a8be000000000000000000000000000000000000000000000000000000000000000000000000
+      _typelessdata: 0000f8be0000283f000000000000f83e0000283f000000000000f8be00000000000000000000f83e00000000000000000000000000000000000000000000000000000000000000000000000000000000
     m_Bindpose: []
     textureRect:
       serializedVersion: 2
       x: 227
       y: 69
-      width: 25
+      width: 31
       height: 21
     textureRectOffset: {x: 0, y: 0}
     atlasRectOffset: {x: -1, y: -1}
     settingsRaw: 64
-    uvTransform: {x: 32, y: 252, z: 32, w: 79.5}
+    uvTransform: {x: 32, y: 242.5, z: 32, w: 69}
     downscaleMultiplier: 1
   m_AtlasRD:
     serializedVersion: 3
@@ -194,31 +194,30 @@ Sprite:
         format: 0
         dimension: 0
       m_DataSize: 80
-      _typelessdata: 000048bf0000a83e00000000000000000000a83e00000000000048bf0000a8be00000000000000000000a8be000000000000000000000000000000000000000000000000000000000000000000000000
+      _typelessdata: 0000f8be0000283f000000000000f83e0000283f000000000000f8be00000000000000000000f83e00000000000000000000000000000000000000000000000000000000000000000000000000000000
     m_Bindpose: []
     textureRect:
       serializedVersion: 2
       x: 227
       y: 69
-      width: 25
+      width: 31
       height: 21
     textureRectOffset: {x: 0, y: 0}
     atlasRectOffset: {x: -1, y: -1}
     settingsRaw: 64
-    uvTransform: {x: 32, y: 252, z: 32, w: 79.5}
+    uvTransform: {x: 32, y: 242.5, z: 32, w: 69}
     downscaleMultiplier: 1
   m_PhysicsShape:
-  - - {x: -0.6875, y: -0.140625}
-    - {x: -0.78125, y: -0.234375}
-    - {x: -0.78125, y: -0.328125}
-    - {x: 0, y: -0.328125}
-    - {x: 0, y: -0.140625}
-  - - {x: -0.34375, y: 0.328125}
-    - {x: -0.40625, y: 0.234375}
-    - {x: -0.40625, y: 0.140625}
-    - {x: -0.3125, y: 0.078125}
-    - {x: -0.21875, y: 0.109375}
-    - {x: -0.1875, y: 0.234375}
-    - {x: -0.28125, y: 0.328125}
+  - - {x: -0.484375, y: 0.1875}
+    - {x: -0.484375, y: 0}
+    - {x: 0.359375, y: 0}
+    - {x: 0.359375, y: 0.1875}
+  - - {x: -0.046875, y: 0.65625}
+    - {x: -0.109375, y: 0.5625}
+    - {x: -0.109375, y: 0.46875}
+    - {x: -0.015625, y: 0.40625}
+    - {x: 0.078125, y: 0.4375}
+    - {x: 0.109375, y: 0.5625}
+    - {x: 0.015625, y: 0.65625}
   m_Bones: []
   m_SpriteID: 7473e7a59ab36e54dbc228db51fbe8b5
