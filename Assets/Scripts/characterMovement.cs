@@ -51,7 +51,7 @@ public class characterMovement : MonoBehaviour
             else if (Input.GetButtonDown("Jump") && !isGrounded() && isClimbing)
             {
                 rb.gravityScale = gravityScale;
-                rb.velocity = new Vector2(horizontal * speed, jumpForce);
+                rb.velocity = new Vector2(rb.velocity.x, jumpForce);
                 isClimbing = false;
             }
             Flip();
