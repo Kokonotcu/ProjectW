@@ -7,12 +7,16 @@ public class GameManager : MonoBehaviour
 	[SerializeField]
 	cursorScript cursor;
 	[SerializeField]
-	float cardNum = 1;
-	[SerializeField]
-	List<CardManager> allCards = new List<CardManager>();
-	[SerializeField]
-	GameObject deck;
+	InstantiateObjects ins;
 
+	List<CardManager> allCards;
+	List<GameObject> allDecks;
+
+	private void Awake()
+	{
+		allCards = ins.GetReferenceToCards();
+		allDecks = ins.GetReferenceToDecks();
+	}
 
 	void Update()
     {
@@ -26,21 +30,27 @@ public class GameManager : MonoBehaviour
 	void CursorUpdate() 
 	{
 		cursor.SetCursorPos();
-		cursor.ClickAndRelease();
+		cursor.ClickAndRelease(out Collider2D other);
 		if (cursor.mouseBehaviour == cursorScript.MouseBehaviour.released) 
 		{
+			int i = 0;
 			foreach (var card in allCards)
 			{
-				card.SetTarget(deck.transform);
+				card.SetTarget(allDecks[i].transform);
+				i++;
 			}
 			cursor.mouseBehaviour = cursorScript.MouseBehaviour.hovering;
 		}
 		else if (cursor.mouseBehaviour == cursorScript.MouseBehaviour.dragging)
 		{
+			int i = 0;
 			foreach (var card in allCards)
 			{
-				card.SetTarget(cursor.transform);
+				card.SetTarget(allDecks[i].transform);
+				i++;
 			}
+			other.GetComponent<CardManager>().SetTarget(cursor.transform);
+			//card.SetTarget();
 		}
 	}
 

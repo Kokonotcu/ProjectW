@@ -23,18 +23,24 @@ public class cursorScript : MonoBehaviour
 		transform.position = Camera.main.ScreenToWorldPoint(cursorPosition);
 	}
 
-	public void ClickAndRelease() 
+	public void ClickAndRelease(out Collider2D other1) 
 	{
-		if (Input.GetMouseButton(0) && 
+		if (Input.GetMouseButton(0) &&
 			other != null &&
 			other.gameObject.tag == "Cards")
 		{
+			other1 = other;
 			mouseBehaviour = MouseBehaviour.dragging;
 		}
-		else if ((Input.GetMouseButtonUp(0))) 
+		else if ((Input.GetMouseButtonUp(0)) || mouseBehaviour == MouseBehaviour.hovering)
 		{
+			other1 = null;
 			mouseBehaviour = MouseBehaviour.released;
 			other = null;
+		}
+		else 
+		{
+			other1 = null;
 		}
 	}
 
