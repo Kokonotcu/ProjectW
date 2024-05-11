@@ -44,19 +44,26 @@ public class characterMovement : MonoBehaviour
         {
             rb.velocity = new Vector2(rb.velocity.x, rb.velocity.y * 0.5f);
         }
-        if( isWalled())
-        {
-            rb.velocity = new Vector2(rb.velocity.x, 0);
-            if (Input.GetButtonDown("Jump"))
-            {
-                rb.velocity = new Vector2(rb.velocity.x, jumpForce);
-            }
-        }
-
-
-        Debug.Log(rb.velocity.y);
+        
         Flip();
         
+    }
+
+    private void OnCollisionEnter2D(Collision2D collision)
+    {
+        if (collision.gameObject.layer == 10)
+        {
+            rb.velocity = Vector2.zero;
+            rb.gravityScale = 0f;
+        }
+    }
+
+    private void OnCollisionExit2D(Collision2D collision)
+    {
+        if (collision.gameObject.layer == 10)
+        {
+            rb.gravityScale = 12f;
+        }
     }
 
     private void FixedUpdate()
@@ -70,10 +77,6 @@ public class characterMovement : MonoBehaviour
         return Physics2D.OverlapCircle(groundCheck.position, 0.2f, groundLayer);
     }
 
-    private bool isWalled()
-    {
-        return Physics2D.OverlapCircle(wallCheck.position, 0.2f, climableLayer);
-    }
     private void Flip()
     {
         if( horizontal > 0 && !isFacingRight || horizontal < 0 && isFacingRight)
