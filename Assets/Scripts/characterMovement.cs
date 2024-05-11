@@ -1,12 +1,13 @@
 using System.Collections;
 using System.Collections.Generic;
+using Unity.VisualScripting;
 using UnityEngine;
 
 public class characterMovement : MonoBehaviour
 {
     private float horizontal;
-    private float speed = 5.0f;
-    private float jumpForce = 10.0f;
+    private float speed = 8.0f;
+    private float jumpForce = 16.0f;
     private bool isFacingRight = true;
     private int jumpCount = 0;
     private int extraJumps = 1;
@@ -28,6 +29,7 @@ public class characterMovement : MonoBehaviour
         if ( Input.GetButtonDown("Jump")  && jumpCount < extraJumps)
         {
             rb.velocity = new Vector2(rb.velocity.x, jumpForce);
+            Physics2D.IgnoreLayerCollision(8, 9, true);
             jumpCount++;
         }
         if( isGrounded() )
@@ -39,13 +41,18 @@ public class characterMovement : MonoBehaviour
             rb.velocity = new Vector2(rb.velocity.x, rb.velocity.y * 0.5f);
         }
 
+
+
+        Debug.Log(rb.velocity.y);
         Flip();
+        
     }
 
     private void FixedUpdate()
     {
         rb.velocity = new Vector2(horizontal * speed, rb.velocity.y);
     }
+
 
     private bool isGrounded()
     {
