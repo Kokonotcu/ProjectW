@@ -10,10 +10,10 @@ public class characterMovement : MonoBehaviour
     public float jumpForce = 20.0f;
     public bool isFacingRight = true;
     public float gravityScale = 5f;
+    public Animator animator;
 
     private bool isClimbing = false;
-
-    public Animator animator;
+    private bool isDead = false;
 
     [SerializeField]
     private Rigidbody2D rb;
@@ -30,23 +30,33 @@ public class characterMovement : MonoBehaviour
     void Update()
     {
         animator.SetFloat("yVelocity", rb.velocity.y);
-        animator.SetFloat("speed",  Mathf.Abs(rb.velocity.x) * speed );
+        animator.SetFloat("speed",  Mathf.Abs( horizontal ) * Mathf.Abs(rb.velocity.x) * speed );
+        animator.SetBool("isDead", isDead);
 
         horizontal = Input.GetAxisRaw("Horizontal");
 
-        if ( Input.GetButtonDown("Jump") && isGrounded() )
+        if(isDead)
         {
-            rb.velocity = new Vector2(rb.velocity.x, jumpForce);
-            //rb.AddForce(Vector2.up * jumpForce, ForceMode2D.Impulse);
+            rb.velocity = Vector2.zero;
+            return;
         }
-        else if( Input.GetButtonDown("Jump") && !isGrounded() && isClimbing)
+
+        if(!isDead)
         {
-            rb.gravityScale = gravityScale;
-            rb.velocity = new Vector2(horizontal * speed, jumpForce);
-            isClimbing = false;
+            if (Input.GetButtonDown("Jump") && isGrounded())
+            {
+                rb.velocity = new Vector2(rb.velocity.x, jumpForce);
+                //rb.AddForce(Vector2.up * jumpForce, ForceMode2D.Impulse);
+            }
+            else if (Input.GetButtonDown("Jump") && !isGrounded() && isClimbing)
+            {
+                rb.gravityScale = gravityScale;
+                rb.velocity = new Vector2(horizontal * speed, jumpForce);
+                isClimbing = false;
+            }
+            Flip();
         }
         
-        Flip();
     }
 
     private void OnCollisionEnter2D(Collision2D collision)
@@ -57,15 +67,29 @@ public class characterMovement : MonoBehaviour
             rb.velocity = Vector2.zero;
             rb.gravityScale = 0f;
         }
+        else if (collision.gameObject.layer == 11)
+        {
+            isDead = true;
+        }
     }
 
 
     private void FixedUpdate()
     {
         //rb.velocity = new Vector2(horizontal * speed, rb.velocity.y);
-        if(!isClimbing)
+        if(!isClimbing && !isDead)
             rb.AddForce(new Vector2(horizontal * speed*5, 0));
         //rb.AddForce(Physics.gravity * (gravityScale - 1) * rb.mass);
+    }
+
+    public void setDead()
+    {
+        isDead = true;
+    }
+
+    public bool getDead()
+    {
+        return isDead;
     }
 
     private bool isGrounded()
