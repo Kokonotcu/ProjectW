@@ -11,6 +11,8 @@ public class characterMovement : MonoBehaviour
     public bool isFacingRight = true;
     public float gravityScale = 5f;
 
+    private bool isClimbing = false;
+
     public Animator animator;
 
     [SerializeField]
@@ -34,37 +36,36 @@ public class characterMovement : MonoBehaviour
 
         if ( Input.GetButtonDown("Jump") && isGrounded() )
         {
-            //rb.velocity = new Vector2(rb.velocity.x, jumpForce);
-            rb.AddForce(Vector2.up * jumpForce, ForceMode2D.Impulse);
+            rb.velocity = new Vector2(rb.velocity.x, jumpForce);
+            //rb.AddForce(Vector2.up * jumpForce, ForceMode2D.Impulse);
+        }
+        else if( Input.GetButtonDown("Jump") && !isGrounded() && isClimbing)
+        {
+            rb.gravityScale = gravityScale;
+            rb.velocity = new Vector2(horizontal * speed, jumpForce);
+            isClimbing = false;
         }
         
-        
         Flip();
-        
     }
 
     private void OnCollisionEnter2D(Collision2D collision)
     {
         if (collision.gameObject.layer == 10)
         {
+            isClimbing = true;
             rb.velocity = Vector2.zero;
             rb.gravityScale = 0f;
         }
     }
 
-    private void OnCollisionExit2D(Collision2D collision)
-    {
-        if (collision.gameObject.layer == 10)
-        {
-            rb.gravityScale = 12f;
-        }
-    }
 
     private void FixedUpdate()
     {
         //rb.velocity = new Vector2(horizontal * speed, rb.velocity.y);
-        rb.AddForce(new Vector2(horizontal * speed*5, 0));
-        rb.AddForce(Physics.gravity * (gravityScale - 1) * rb.mass);
+        if(!isClimbing)
+            rb.AddForce(new Vector2(horizontal * speed*5, 0));
+        //rb.AddForce(Physics.gravity * (gravityScale - 1) * rb.mass);
     }
 
     private bool isGrounded()
