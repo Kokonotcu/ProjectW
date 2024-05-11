@@ -16,8 +16,13 @@ public class characterMovement : MonoBehaviour
     private Rigidbody2D rb;
     [SerializeField]
     private Transform groundCheck;
+
     [SerializeField]
-    private LayerMask groundLayer; 
+    private Transform wallCheck;
+    [SerializeField]
+    private LayerMask groundLayer;
+    [SerializeField]
+    private LayerMask climableLayer;
 
 
     // Update is called once per frame
@@ -39,7 +44,14 @@ public class characterMovement : MonoBehaviour
         {
             rb.velocity = new Vector2(rb.velocity.x, rb.velocity.y * 0.5f);
         }
-
+        if( isWalled())
+        {
+            rb.velocity = new Vector2(rb.velocity.x, 0);
+            if (Input.GetButtonDown("Jump"))
+            {
+                rb.velocity = new Vector2(rb.velocity.x, jumpForce);
+            }
+        }
 
 
         Debug.Log(rb.velocity.y);
@@ -58,7 +70,10 @@ public class characterMovement : MonoBehaviour
         return Physics2D.OverlapCircle(groundCheck.position, 0.2f, groundLayer);
     }
 
-
+    private bool isWalled()
+    {
+        return Physics2D.OverlapCircle(wallCheck.position, 0.2f, climableLayer);
+    }
     private void Flip()
     {
         if( horizontal > 0 && !isFacingRight || horizontal < 0 && isFacingRight)
