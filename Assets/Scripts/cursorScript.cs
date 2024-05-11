@@ -1,12 +1,13 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using Unity.VisualScripting;
 using UnityEngine;
+using UnityEngine.Tilemaps;
 
 public class cursorScript : MonoBehaviour
 {
     Vector3 cursorPosition;
-	Collider2D previousColl;
 
 	public void SetCursorPos()
 	{
@@ -23,10 +24,17 @@ public class cursorScript : MonoBehaviour
 			new Vector3(Input.mousePosition.x, Input.mousePosition.y, 20)),
 			Vector2.zero);
 		hit1 = hit.collider;
-		if (hit.collider != null)
-		{
-			hit.collider.gameObject.GetComponent<CardManager>().SetTarget(transform);
-		}
 	}
 
+	public TileBase GetTileAt(Tilemap map) 
+	{
+		return map.GetTile(Vector3Int.FloorToInt( transform.position));
+	}
+
+	public void SetTileAt(Tilemap map, TileBase block) 
+	{
+		map.GetComponentInParent<Grid>().cellSize = new Vector3(1, 1, 0);
+		map.SetTile(Vector3Int.FloorToInt( transform.position),null);
+		
+	}
 }

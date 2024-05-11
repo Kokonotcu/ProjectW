@@ -26,8 +26,8 @@ public class InstantiateObjects : MonoBehaviour
 		for (int i = 0; i < cardNum; i++)
 		{
 			allDecks[i].transform.position = new Vector3(
-				i*(10.0f)/cardNum + Camera.main.transform.position.x-5.0f,
-				Camera.main.transform.position.y - 2.0f, 
+				i*(18.0f)/cardNum + Camera.main.transform.position.x - 7.5f,
+				Camera.main.transform.position.y - 3.0f, 
 				0.0f);
 
 			allCards[i].SetTarget(allDecks[i].transform);
