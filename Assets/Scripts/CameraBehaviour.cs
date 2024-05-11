@@ -9,6 +9,7 @@ public class CameraBehaviour : MonoBehaviour
     public int CurrentLevelIndex = 0;
 
     public bool isTransition = false;
+    public float transitionFactor = 10f;
 
     // Start is called before the first frame update
     void Start()
@@ -17,16 +18,16 @@ public class CameraBehaviour : MonoBehaviour
     }
 
     // Update is called once per frame
-    void Update()
+    void LateUpdate()
     {
-        this.gameObject.transform.position = Vector3.Lerp(gameObject.transform.position, Levels[CurrentLevelIndex].transform.position + new Vector3(0,0,-10), 2.5f * Time.deltaTime);
+        this.gameObject.transform.position = Vector3.Lerp(gameObject.transform.position, Levels[CurrentLevelIndex].transform.position + new Vector3(0,0,-10), transitionFactor * Time.deltaTime);
     }
 
-    public void ProceedNextLevel()
+    public void ProceedNextLevel(int newCurrentLevelIndex)
     {
-        CurrentLevelIndex++;
+        CurrentLevelIndex = newCurrentLevelIndex;
 
-        if(CurrentLevelIndex >= Levels.Count)
+        if (CurrentLevelIndex >= Levels.Count)
         {
             //game over
         }

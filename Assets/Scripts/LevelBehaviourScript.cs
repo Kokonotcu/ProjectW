@@ -4,6 +4,7 @@ using UnityEngine;
 
 public class LevelBehaviourScript : MonoBehaviour
 {
+    public int LevelIndex;
     // Start is called before the first frame update
     void Start()
     {
@@ -19,9 +20,9 @@ public class LevelBehaviourScript : MonoBehaviour
     private void OnTriggerEnter2D(Collider2D collision)
     {
         Debug.Log(collision.name + " triggered me");
-        if (collision.gameObject == GameObject.Find("testobj"))
+        if (collision.gameObject.CompareTag("Player"))
         {
-            Camera.main.GetComponent<CameraBehaviour>().ProceedNextLevel();
+            Camera.main.GetComponent<CameraBehaviour>().ProceedNextLevel(LevelIndex);
         }
     }
 }
