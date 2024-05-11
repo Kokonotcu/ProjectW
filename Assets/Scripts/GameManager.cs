@@ -1,6 +1,8 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using static cursorScript;
 
 public class GameManager : MonoBehaviour
 {
@@ -8,6 +10,8 @@ public class GameManager : MonoBehaviour
 	cursorScript cursor;
 	[SerializeField]
 	InstantiateObjects ins;
+
+	Collider2D other;
 
 	List<CardManager> allCards;
 	List<GameObject> allDecks;
@@ -30,27 +34,19 @@ public class GameManager : MonoBehaviour
 	void CursorUpdate() 
 	{
 		cursor.SetCursorPos();
-		cursor.ClickAndRelease(out Collider2D other);
-		if (cursor.mouseBehaviour == cursorScript.MouseBehaviour.released) 
+		if (Input.GetMouseButtonDown(0))
 		{
-			int i = 0;
-			foreach (var card in allCards)
-			{
-				card.SetTarget(allDecks[i].transform);
-				i++;
-			}
-			cursor.mouseBehaviour = cursorScript.MouseBehaviour.hovering;
+			cursor.SendRay(out Collider2D hit);
+			other = hit;
+			Debug.Log("a");
 		}
-		else if (cursor.mouseBehaviour == cursorScript.MouseBehaviour.dragging)
+		else if (Input.GetMouseButtonUp(0)) 
 		{
-			int i = 0;
-			foreach (var card in allCards)
+			if (other != null) 
 			{
-				card.SetTarget(allDecks[i].transform);
-				i++;
+				other.GetComponent<CardManager>().SetTarget(
+					other.GetComponent<CardManager>().selfDeck.transform);
 			}
-			other.GetComponent<CardManager>().SetTarget(cursor.transform);
-			//card.SetTarget();
 		}
 	}
 

@@ -6,15 +6,7 @@ using UnityEngine;
 public class cursorScript : MonoBehaviour
 {
     Vector3 cursorPosition;
-	Collider2D other;
-	public MouseBehaviour mouseBehaviour;
-
-	public enum MouseBehaviour 
-	{
-		hovering,
-		dragging,
-		released
-	}
+	Collider2D previousColl;
 
 	public void SetCursorPos()
 	{
@@ -23,34 +15,18 @@ public class cursorScript : MonoBehaviour
 		transform.position = Camera.main.ScreenToWorldPoint(cursorPosition);
 	}
 
-	public void ClickAndRelease(out Collider2D other1) 
+	public void SendRay(out Collider2D hit1)
 	{
-		if (Input.GetMouseButton(0) &&
-			other != null &&
-			other.gameObject.tag == "Cards")
+		Vector2 rayA = new Vector2(Camera.main.ScreenToWorldPoint(Input.mousePosition).x,
+			Camera.main.ScreenToWorldPoint(Input.mousePosition).y);
+		RaycastHit2D hit = Physics2D.Raycast(Camera.main.ScreenToWorldPoint(
+			new Vector3(Input.mousePosition.x, Input.mousePosition.y, 20)),
+			Vector2.zero);
+		hit1 = hit.collider;
+		if (hit.collider != null)
 		{
-			other1 = other;
-			mouseBehaviour = MouseBehaviour.dragging;
-		}
-		else if ((Input.GetMouseButtonUp(0)) || mouseBehaviour == MouseBehaviour.hovering)
-		{
-			other1 = null;
-			mouseBehaviour = MouseBehaviour.released;
-			other = null;
-		}
-		else 
-		{
-			other1 = null;
+			hit.collider.gameObject.GetComponent<CardManager>().SetTarget(transform);
 		}
 	}
 
-	private void OnTriggerEnter2D(Collider2D collision)
-	{
-		other = collision;
-		mouseBehaviour = MouseBehaviour.hovering;
-	}
-
-	private void OnTriggerExit2D(Collider2D collision)
-	{
-	}
 }

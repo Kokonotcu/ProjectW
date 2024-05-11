@@ -25,14 +25,13 @@ public class InstantiateObjects : MonoBehaviour
 
 		for (int i = 0; i < cardNum; i++)
 		{
-			Debug.Log(allDecks[i]);
-
 			allDecks[i].transform.position = new Vector3(
 				i*(10.0f)/cardNum + Camera.main.transform.position.x-5.0f,
 				Camera.main.transform.position.y - 2.0f, 
 				0.0f);
 
-			allCards[i].SetTarget(allCards[i].transform);
+			allCards[i].SetTarget(allDecks[i].transform);
+			allCards[i].selfDeck = allDecks[i];
 		}
 	}
 
