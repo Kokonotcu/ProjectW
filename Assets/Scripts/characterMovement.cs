@@ -5,20 +5,19 @@ using UnityEngine;
 
 public class characterMovement : MonoBehaviour
 {
-    private float horizontal;
-    private float speed = 12.0f;
-    private float jumpForce = 40.0f;
-    private bool isFacingRight = true;
-    private int jumpCount = 0;
-    private int extraJumps = 10;
+    public float horizontal;
+    public float speed = 12.0f;
+    public float jumpForce = 20.0f;
+    public bool isFacingRight = true;
+    public float gravityScale = 5f;
+
+    public Animator animator;
 
     [SerializeField]
     private Rigidbody2D rb;
     [SerializeField]
     private Transform groundCheck;
 
-    [SerializeField]
-    private Transform wallCheck;
     [SerializeField]
     private LayerMask groundLayer;
     [SerializeField]
@@ -28,22 +27,17 @@ public class characterMovement : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        animator.SetFloat("yVelocity", rb.velocity.y);
+        animator.SetFloat("speed", Mathf.Abs(horizontal)*speed);
 
         horizontal = Input.GetAxisRaw("Horizontal");
 
-        if ( Input.GetButtonDown("Jump")  && jumpCount < extraJumps)
+        if ( Input.GetButtonDown("Jump") && isGrounded() )
         {
-            rb.velocity = new Vector2(rb.velocity.x, jumpForce);
-            jumpCount++;
+            //rb.velocity = new Vector2(rb.velocity.x, jumpForce);
+            rb.AddForce(Vector2.up * jumpForce, ForceMode2D.Impulse);
         }
-        if( isGrounded() )
-        {
-            jumpCount = 0;
-        }
-        if (Input.GetButtonUp("Jump") && rb.velocity.y > 0f)
-        {
-            rb.velocity = new Vector2(rb.velocity.x, rb.velocity.y * 0.5f);
-        }
+        
         
         Flip();
         
@@ -70,6 +64,7 @@ public class characterMovement : MonoBehaviour
     {
         //rb.velocity = new Vector2(horizontal * speed, rb.velocity.y);
         rb.AddForce(new Vector2(horizontal * speed*5, 0));
+        rb.AddForce(Physics.gravity * (gravityScale - 1) * rb.mass);
     }
 
     private bool isGrounded()
