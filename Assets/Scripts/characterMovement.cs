@@ -6,8 +6,8 @@ using UnityEngine;
 public class characterMovement : MonoBehaviour
 {
     private float horizontal;
-    private float speed = 8.0f;
-    private float jumpForce = 16.0f;
+    private float speed = 12.0f;
+    private float jumpForce = 40.0f;
     private bool isFacingRight = true;
     private int jumpCount = 0;
     private int extraJumps = 1;
@@ -17,7 +17,7 @@ public class characterMovement : MonoBehaviour
     [SerializeField]
     private Transform groundCheck;
     [SerializeField]
-    private LayerMask groundLayer;
+    private LayerMask groundLayer; 
 
 
     // Update is called once per frame
@@ -29,7 +29,6 @@ public class characterMovement : MonoBehaviour
         if ( Input.GetButtonDown("Jump")  && jumpCount < extraJumps)
         {
             rb.velocity = new Vector2(rb.velocity.x, jumpForce);
-            Physics2D.IgnoreLayerCollision(8, 9, true);
             jumpCount++;
         }
         if( isGrounded() )
@@ -50,14 +49,15 @@ public class characterMovement : MonoBehaviour
 
     private void FixedUpdate()
     {
-        rb.velocity = new Vector2(horizontal * speed, rb.velocity.y);
+        //rb.velocity = new Vector2(horizontal * speed, rb.velocity.y);
+        rb.AddForce(new Vector2(horizontal * speed*5, 0));
     }
-
 
     private bool isGrounded()
     {
         return Physics2D.OverlapCircle(groundCheck.position, 0.2f, groundLayer);
     }
+
 
     private void Flip()
     {
@@ -69,15 +69,5 @@ public class characterMovement : MonoBehaviour
             transform.localScale = theScale;
         }
     }
-
-    private void Jump()
-    {
-        if (Input.GetKeyDown(KeyCode.Space) && isGrounded())
-        {
-            rb.velocity = new Vector2(rb.velocity.x, jumpForce);
-        }
-    }
-
-
 
 }
