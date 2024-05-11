@@ -7,6 +7,9 @@ public class CameraBehaviour : MonoBehaviour
 {
     public List<GameObject> Levels = new List<GameObject>();
 
+    public GameObject BackGround1;
+    public GameObject BackGround2;
+
     public int CurrentLevelIndex = 0;
 
     public bool isTransition = false;
@@ -26,6 +29,15 @@ public class CameraBehaviour : MonoBehaviour
     void LateUpdate()
     {
         this.gameObject.transform.position = Vector3.Lerp(gameObject.transform.position, Levels[CurrentLevelIndex].transform.position + new Vector3(0,0,-10), transitionFactor * Time.deltaTime);
+
+        if(CurrentLevelIndex <= 3)
+        {
+            BackGround1.transform.position = transform.position + new Vector3(0, 0, 10);
+        }
+        if(CurrentLevelIndex == 11)
+        {
+            //
+        }
 
         if (Input.GetMouseButtonDown(0))
         {
