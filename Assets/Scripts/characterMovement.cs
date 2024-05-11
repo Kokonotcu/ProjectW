@@ -10,7 +10,7 @@ public class characterMovement : MonoBehaviour
     private float jumpForce = 40.0f;
     private bool isFacingRight = true;
     private int jumpCount = 0;
-    private int extraJumps = 1;
+    private int extraJumps = 10;
 
     [SerializeField]
     private Rigidbody2D rb;
