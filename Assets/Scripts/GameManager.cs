@@ -55,7 +55,6 @@ public class GameManager : MonoBehaviour
 		{
 			if (another != null && another.tag == "Cards")
 			{
-				Debug.Log("a");
 				var cm = another.GetComponent<CardManager>();
 				if (cursor.collidingDeck != null && cursor.collidingDeck.gameObject != cm.selfDeck)
 				{
@@ -64,16 +63,17 @@ public class GameManager : MonoBehaviour
 						cm.SetTarget(cursor.collidingDeck.transform);
 						cm.ChangeSelfDeck(cursor.collidingDeck.gameObject);
 					}
+					//If sent to Viewport
 					else 
 					{
 						cm.SetTarget(cursor.collidingDeck.transform);
 						cm.ChangeSelfDeck(cursor.collidingDeck.gameObject);
 						SentToViewport(another);
 					}
+					//If sent to Viewport end
 				}
 				else
 				{
-
 					cm.SetTarget(cm.selfDeck.transform);
 				}
 			}

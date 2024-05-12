@@ -32,7 +32,7 @@ public class cursorScript : MonoBehaviour
 	{
 		if (collision.tag == "Deck" || collision.tag == "Viewport")
 		{
-			Debug.Log(collision.name);
+			//Debug.Log(collision.name);
 			collidingDeck = collision;
 		}
 	}
