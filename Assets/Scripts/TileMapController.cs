@@ -40,6 +40,12 @@ public class TileMapController : MonoBehaviour
     public AudioClip hellClip;
     public AudioClip sandClip;
     public AudioClip iceClip;
+    public AudioSource selfSource;
+
+    public void Start()
+    {
+        selfSource = gameObject.GetComponent<AudioSource>(); 
+    }
 
     public IEnumerator RunScenes(float delayTime)
     {
@@ -94,17 +100,20 @@ public class TileMapController : MonoBehaviour
             {
                 case CardType.Hell:
                     Instantiate(HellArea, position / 2, new Quaternion(), null);
-
+                    selfSource.clip = hellClip;
+                    selfSource.Play();
                     break;
 
                 case CardType.Sand:
                     Instantiate(SandArea, position / 2, new Quaternion(), null);
-
+                    selfSource.clip = sandClip;
+                    selfSource.Play();
                     break;
 
                 case CardType.Ice:
                     Instantiate(IceArea, position / 2, new Quaternion(), null);
-
+                    selfSource.clip = iceClip;
+                    selfSource.Play();
                     break;
 
             }
