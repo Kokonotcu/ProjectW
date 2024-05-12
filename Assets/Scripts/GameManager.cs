@@ -30,6 +30,10 @@ public class GameManager : MonoBehaviour
 	void Update()
     {
 		CursorUpdate();
+		for (int i = 0;i < 3;i++) 
+		{
+			allInstances[i].UpdateDeckPos();
+		}
 		foreach (var cardList in allCards)
 		{
 			foreach (var card in cardList) 
