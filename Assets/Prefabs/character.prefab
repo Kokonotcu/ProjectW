@@ -25,7 +25,38 @@ Transform:
   m_GameObject: {fileID: 647204187858080823}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: -0.011, z: 0}
+  m_LocalPosition: {x: 0, y: -0.01, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 6250011621225797730}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &840982178755284049
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 5613657245350676221}
+  m_Layer: 9
+  m_Name: tileCheck
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &5613657245350676221
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 840982178755284049}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: -0.01, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -45,6 +76,7 @@ GameObject:
   - component: {fileID: 8603091626357069610}
   - component: {fileID: 1397750414985374030}
   - component: {fileID: 6546680596384961080}
+  - component: {fileID: 4629376479147796933}
   m_Layer: 9
   m_Name: character
   m_TagString: Player
@@ -66,6 +98,7 @@ Transform:
   m_ConstrainProportionsScale: 1
   m_Children:
   - {fileID: 8596989507497292396}
+  - {fileID: 5613657245350676221}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!212 &1228019613657377104
@@ -135,7 +168,7 @@ Rigidbody2D:
   m_Mass: 1
   m_LinearDrag: 8
   m_AngularDrag: 0
-  m_GravityScale: 15
+  m_GravityScale: 10
   m_Material: {fileID: 0}
   m_IncludeLayers:
     serializedVersion: 2
@@ -163,7 +196,7 @@ MonoBehaviour:
   speed: 12
   jumpForce: 40
   isFacingRight: 1
-  gravityScale: 5
+  gravityScale: 10
   animator: {fileID: 6546680596384961080}
   rb: {fileID: 2544309682080305455}
   groundCheck: {fileID: 8596989507497292396}
@@ -229,3 +262,15 @@ Animator:
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorStateOnDisable: 0
   m_WriteDefaultValuesOnDisable: 0
+--- !u!114 &4629376479147796933
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8173939222617288346}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1c92ae0ec62484b4d9419598feebb7f1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
