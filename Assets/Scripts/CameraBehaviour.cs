@@ -12,6 +12,8 @@ public class CameraBehaviour : MonoBehaviour
     public GameObject BackGround1;
     public GameObject BackGround2;
 
+    public GameObject ViewPort;
+
     public int CurrentLevelIndex = 0;
 
     public bool isTransition = false;
@@ -25,11 +27,25 @@ public class CameraBehaviour : MonoBehaviour
 
     public bool isScriptedStarted;
 
+    public int LastLevelIndex;
+
+    public GameManager GManager;
+
+    public List<List<CardType>> LevelCards = new List<List<CardType>>()
+    {
+        new(),
+        new(){CardType.Ice},
+        new(){CardType.Ice, CardType.Sand},
+        new(){CardType.Sand,CardType.Hell},
+    };
+
     // Start is called before the first frame update
     void Start()
     {
-        //ProceedNextLevel(CheckPoint);
-        //GameObject.Find("character").transform.position = Levels[CheckPoint].transform.Find("playerSpawnPoint").transform.position;
+        GManager = GameObject.Find("GAMEMANAGER").GetComponent<GameManager>();  
+
+        ProceedNextLevel(CheckPoint);
+        GameObject.Find("character").transform.position = Levels[CheckPoint].transform.Find("playerSpawnPoint").transform.position;
     }
 
     // Update is called once per frame
@@ -45,24 +61,25 @@ public class CameraBehaviour : MonoBehaviour
         {
             //
         }
+        ViewPort.transform.position = transform.position + new Vector3(0, 0, 10);
 
-        Vector3 worldPosition = Camera.main.ScreenToWorldPoint(Input.mousePosition) + new Vector3(0, 0, 10f);
-        Debug.Log(worldPosition);
-        if (Input.GetMouseButtonDown(0))
-        {
-            GameObject.Find("TileMapController").GetComponent<TileMapController>().
-                ChangeTilesWithinRadius(new Vector3Int(Mathf.FloorToInt(worldPosition.x * 2), Mathf.FloorToInt(worldPosition.y * 2), Mathf.FloorToInt(worldPosition.z)), CardType.Hell);
-        }
-        if (Input.GetMouseButtonDown(1))
-        {
-            GameObject.Find("TileMapController").GetComponent<TileMapController>().
-                ChangeTilesWithinRadius(new Vector3Int(Mathf.FloorToInt(worldPosition.x * 2), Mathf.FloorToInt(worldPosition.y * 2), Mathf.FloorToInt(worldPosition.z)), CardType.Ice);
-        }
-        if (Input.GetMouseButtonDown(2))
-        {
-            GameObject.Find("TileMapController").GetComponent<TileMapController>().
-                ChangeTilesWithinRadius(new Vector3Int(Mathf.FloorToInt(worldPosition.x * 2), Mathf.FloorToInt(worldPosition.y * 2), Mathf.FloorToInt(worldPosition.z)), CardType.Sand);
-        }
+        //Vector3 worldPosition = Camera.main.ScreenToWorldPoint(Input.mousePosition) + new Vector3(0, 0, 10f);
+        ////Debug.Log(worldPosition);
+        //if (Input.GetMouseButtonDown(0))
+        //{
+        //    GameObject.Find("TileMapController").GetComponent<TileMapController>().
+        //        ChangeTilesWithinRadius(new Vector3Int(Mathf.FloorToInt(worldPosition.x * 2), Mathf.FloorToInt(worldPosition.y * 2), Mathf.FloorToInt(worldPosition.z)), CardType.Hell);
+        //}
+        //if (Input.GetMouseButtonDown(1))
+        //{
+        //    GameObject.Find("TileMapController").GetComponent<TileMapController>().
+        //        ChangeTilesWithinRadius(new Vector3Int(Mathf.FloorToInt(worldPosition.x * 2), Mathf.FloorToInt(worldPosition.y * 2), Mathf.FloorToInt(worldPosition.z)), CardType.Ice);
+        //}
+        //if (Input.GetMouseButtonDown(2))
+        //{
+        //    GameObject.Find("TileMapController").GetComponent<TileMapController>().
+        //        ChangeTilesWithinRadius(new Vector3Int(Mathf.FloorToInt(worldPosition.x * 2), Mathf.FloorToInt(worldPosition.y * 2), Mathf.FloorToInt(worldPosition.z)), CardType.Sand);
+        //}
         if (Input.GetMouseButtonDown(3))
         {
             StartCoroutine(GameObject.Find("TileMapController").GetComponent<TileMapController>().RunScenes(0.3f));
@@ -80,12 +97,23 @@ public class CameraBehaviour : MonoBehaviour
 
     public void ProceedNextLevel(int newCurrentLevelIndex)
     {
+        GManager.ResetCards();
+
+        if(CheckPoint - 1 < newCurrentLevelIndex)
+        {
+            foreach (CardType type in LevelCards[newCurrentLevelIndex])
+            {
+                GManager.SpawnSafely(type);
+            }
+        }
+
         CurrentLevelIndex = newCurrentLevelIndex;
 
-        if(newCurrentLevelIndex > CheckPoint)
+        if(newCurrentLevelIndex > LastLevelIndex)
         {
             CheckPoint = newCurrentLevelIndex;
         }
+
         if (isScriptedStarted)
         {
             StartCoroutine(GameObject.Find("TileMapController").GetComponent<TileMapController>().RunScenes(0.2f));

@@ -15,6 +15,8 @@ public class characterMovement : MonoBehaviour
     private bool isClimbing = false;
     private bool isDead = false;
 
+    public GameObject GameOverScreen;
+
     [SerializeField]
     public Rigidbody2D rb;
     [SerializeField]
@@ -87,6 +89,7 @@ public class characterMovement : MonoBehaviour
     public void setDead()
     {
         isDead = true;
+        GameOverScreen.SetActive(true);
     }
 
     public bool getDead()

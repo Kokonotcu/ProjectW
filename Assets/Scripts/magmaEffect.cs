@@ -1,39 +1,35 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UIElements;
 
 public class magmaEffect : MonoBehaviour
 {
-    private bool canKillPlayer = false;
     private GameObject player;
     // Start is called before the first frame update
     void Start()
     {
-        
-    }
+        player = GameObject.Find("character");
 
-    private void OnTriggerEnter2D(Collider2D other)
-    {
-        if (other.gameObject.layer == 9)
+        var traps = GameObject.FindGameObjectsWithTag("Trap");
+
+        foreach (var trap in traps)
         {
-            player = other.gameObject;
-            canKillPlayer = true;
+            if (Vector3.Distance(transform.position, trap.transform.position) <= 3.7f)
+            {
+                Destroy(trap);
+            }
         }
-    }
-    private void OnTriggerExit2D(Collider2D other)
-    {
-        if (other.gameObject.layer == 9)
+
+        if (Vector3.Distance(transform.position, player.transform.position) <= 3.7f)
         {
-            canKillPlayer = false;
+            KillPlayer();
         }
     }
 
     private void KillPlayer()
     {
-        if(canKillPlayer)
-        {
-            player.GetComponent<characterMovement>().setDead();
-        }
+        player.GetComponent<characterMovement>().setDead();
     }
 
     // Update is called once per frame

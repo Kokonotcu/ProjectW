@@ -63,23 +63,23 @@ public class GameManager : MonoBehaviour
 		}
 		if (Input.GetMouseButtonUp(0))
 		{
-			if (another != null && another.tag == "Cards")
+			if (another != null && another.CompareTag("Cards"))
 			{
 				var cm = another.GetComponent<CardManager>();
 				if (cursor.collidingDeck != null && cursor.collidingDeck.gameObject != cm.selfDeck)
 				{
-					if (cursor.collidingDeck.tag == "Deck")
-					{
-						cm.SetTarget(cursor.collidingDeck.transform);
-						cm.ChangeSelfDeck(cursor.collidingDeck.gameObject);
-					}
+					//if (cursor.collidingDeck.tag == "Deck")
+					//{
+					//	cm.SetTarget(cursor.collidingDeck.transform);
+					//	cm.ChangeSelfDeck(cursor.collidingDeck.gameObject);
+					//}
 					//If sent to Viewport
-					else 
-					{
+					//else 
+					//{
 						cm.SetTarget(cursor.collidingDeck.transform);
 						cm.ChangeSelfDeck(cursor.collidingDeck.gameObject);
 						SentToViewport(another);
-					}
+					//}
 					//If sent to Viewport end
 				}
 				else
@@ -115,30 +115,34 @@ public class GameManager : MonoBehaviour
         Vector3 worldPosition = Camera.main.ScreenToWorldPoint(Input.mousePosition) + new Vector3(0, 0, 10f);
         
 
-		switch(sentObj.gameObject.name)
+		switch(sentObj.gameObject.GetComponent<CardManager>().cardType)
 		{
-			case "Hell":
+			case CardType.Hell:
                 GameObject.Find("TileMapController").GetComponent<TileMapController>().
 					ChangeTilesWithinRadius(new Vector3Int(Mathf.FloorToInt(worldPosition.x * 2), Mathf.FloorToInt(worldPosition.y * 2), Mathf.FloorToInt(worldPosition.z)), CardType.Hell);
                 break;
 
-			case "Ice":
+			case CardType.Ice:
                 GameObject.Find("TileMapController").GetComponent<TileMapController>().
 					ChangeTilesWithinRadius(new Vector3Int(Mathf.FloorToInt(worldPosition.x * 2), Mathf.FloorToInt(worldPosition.y * 2), Mathf.FloorToInt(worldPosition.z)), CardType.Ice);
 				break;
 
-			case "Sand":
+			case CardType.Sand:
                 GameObject.Find("TileMapController").GetComponent<TileMapController>().
 					ChangeTilesWithinRadius(new Vector3Int(Mathf.FloorToInt(worldPosition.x * 2), Mathf.FloorToInt(worldPosition.y * 2), Mathf.FloorToInt(worldPosition.z)), CardType.Sand);
 				break;
         }
 
-		//DestroySafely(sentObj.gameObject);
-		//ResetCards();
-		//SpawnSafely(CardType.Sand);
-		//SpawnSafely(CardType.Hell);
-		//SpawnSafely(CardType.Ice);
-	}
+		DestroySafely(sentObj.gameObject);
+
+		CameraBehaviour cum = Camera.main.GetComponent<CameraBehaviour>();
+
+		cum.LevelCards[cum.CurrentLevelIndex].Remove(sentObj.gameObject.GetComponent<CardManager>().cardType);
+        //ResetCards();
+        //SpawnSafely(CardType.Sand);
+        //SpawnSafely(CardType.Hell);
+        //SpawnSafely(CardType.Ice);
+    }
 
 	public void DestroySafely(GameObject sentObj) 
 	{
