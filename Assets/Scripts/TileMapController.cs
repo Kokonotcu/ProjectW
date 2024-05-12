@@ -40,11 +40,13 @@ public class TileMapController : MonoBehaviour
     public AudioClip hellClip;
     public AudioClip sandClip;
     public AudioClip iceClip;
+    public AudioClip music;
     public AudioSource selfSource;
+    public AudioSource musicSource;
 
     public void Start()
     {
-        selfSource = gameObject.GetComponent<AudioSource>(); 
+        selfSource = gameObject.GetComponent<AudioSource>();
     }
 
     public IEnumerator RunScenes(float delayTime)

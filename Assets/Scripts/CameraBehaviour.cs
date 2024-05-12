@@ -35,8 +35,17 @@ public class CameraBehaviour : MonoBehaviour
     {
         new(),
         new(){CardType.Ice},
-        new(){CardType.Ice, CardType.Sand},
+        new(){CardType.Ice},
         new(){CardType.Sand,CardType.Hell},
+        new(){CardType.Sand,CardType.Hell},
+        new(){CardType.Hell,CardType.Hell,CardType.Sand},
+        new(){CardType.Hell},
+        new(),
+        new(),
+        new(),
+        new(),
+        new(),
+        new(),
     };
 
     // Start is called before the first frame update
@@ -80,19 +89,25 @@ public class CameraBehaviour : MonoBehaviour
         //    GameObject.Find("TileMapController").GetComponent<TileMapController>().
         //        ChangeTilesWithinRadius(new Vector3Int(Mathf.FloorToInt(worldPosition.x * 2), Mathf.FloorToInt(worldPosition.y * 2), Mathf.FloorToInt(worldPosition.z)), CardType.Sand);
         //}
-        if (Input.GetMouseButtonDown(3))
-        {
-            StartCoroutine(GameObject.Find("TileMapController").GetComponent<TileMapController>().RunScenes(0.3f));
-            isScriptedStarted = true;
-        }
+        //if (Input.GetMouseButtonDown(3))
+        //{
+        //    StartCoroutine(GameObject.Find("TileMapController").GetComponent<TileMapController>().RunScenes(0.3f));
+        //    isScriptedStarted = true;
+        //}
     }
     public void RestartLevel()
     {
         int levelIndex = CurrentLevelIndex;
-        SceneManager.LoadScene("MainForKoray", LoadSceneMode.Single);
+        SceneManager.LoadScene("Main", LoadSceneMode.Single);
 
         CurrentLevelIndex = levelIndex;
         CheckPoint = levelIndex;
+    }
+
+    public void StartScripted()
+    {
+        StartCoroutine(GameObject.Find("TileMapController").GetComponent<TileMapController>().RunScenes(0.3f));
+        isScriptedStarted = true;
     }
 
     public void ProceedNextLevel(int newCurrentLevelIndex)

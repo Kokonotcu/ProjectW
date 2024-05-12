@@ -18,7 +18,7 @@ public class sandEffects : MonoBehaviour
             originalSpeed = other.gameObject.GetComponent<characterMovement>().speed;
             originalJumpForce = other.gameObject.GetComponent<characterMovement>().jumpForce;
             other.gameObject.GetComponent<characterMovement>().speed = 3.0f;
-            other.gameObject.GetComponent<characterMovement>().jumpForce = 20.0f;
+            other.gameObject.GetComponent<characterMovement>().jumpForce = 30.0f;
         }
     }
 

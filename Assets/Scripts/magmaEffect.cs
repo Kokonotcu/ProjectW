@@ -15,13 +15,13 @@ public class magmaEffect : MonoBehaviour
 
         foreach (var trap in traps)
         {
-            if (Vector3.Distance(transform.position, trap.transform.position) <= 3.7f)
+            if (Vector3.Distance(transform.position, trap.transform.position) <= 3f)
             {
                 Destroy(trap);
             }
         }
 
-        if (Vector3.Distance(transform.position, player.transform.position) <= 3.7f)
+        if (Vector3.Distance(transform.position, player.transform.position) <= 3f)
         {
             KillPlayer();
         }
