@@ -43,6 +43,7 @@ public class TileMapController : MonoBehaviour
                     // If the tile is a rock tile, change it to magma tile
                     if (baseTile != null)
                     {
+                        Debug.Log(baseTile.name);
                         int index = int.Parse(baseTile.name[(baseTile.name.LastIndexOf('_') + 1)..]);
                         switch (type)
                         {
@@ -59,6 +60,7 @@ public class TileMapController : MonoBehaviour
                     }
                     if (colliderTile != null)
                     {
+                        Debug.Log(colliderTile.name);
                         int index = int.Parse(colliderTile.name[(colliderTile.name.LastIndexOf('_') + 1)..]);
                         switch (type)
                         {

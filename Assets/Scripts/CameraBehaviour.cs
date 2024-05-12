@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.TextCore.Text;
@@ -20,12 +21,13 @@ public class CameraBehaviour : MonoBehaviour
     public GameObject SandParticle;
     public GameObject IceParticle;
 
-    public int CheckPoint = 0;
+    public static int CheckPoint = 0;
 
     // Start is called before the first frame update
     void Start()
     {
-        
+        ProceedNextLevel(CheckPoint);
+        GameObject.Find("character").transform.position = Levels[CheckPoint].transform.Find("playerSpawnPoint").transform.position;
     }
 
     // Update is called once per frame
@@ -63,14 +65,13 @@ public class CameraBehaviour : MonoBehaviour
                 ChangeTilesWithinRadius(new Vector3Int(Mathf.FloorToInt(worldPosition.x * 2), Mathf.FloorToInt(worldPosition.y * 2), Mathf.FloorToInt(worldPosition.z)), TileMapController.CardType.Sand);
         }
     }
-    public void RestartLevel(int levelIndex)
+    public void RestartLevel()
     {
-        SceneManager.LoadScene("Main");
+        int levelIndex = CurrentLevelIndex;
+        SceneManager.LoadScene("Main", LoadSceneMode.Single);
 
         CurrentLevelIndex = levelIndex;
         CheckPoint = levelIndex;
-
-        GameObject.Find("character").transform.position = Levels[levelIndex].transform.position;
     }
 
     public void ProceedNextLevel(int newCurrentLevelIndex)
