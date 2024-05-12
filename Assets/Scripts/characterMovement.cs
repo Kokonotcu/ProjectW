@@ -61,12 +61,14 @@ public class characterMovement : MonoBehaviour
 
     private void OnCollisionEnter2D(Collision2D collision)
     {
+        //climbable object
         if (collision.gameObject.layer == 10)
         {
             isClimbing = true;
             rb.velocity = Vector2.zero;
             rb.gravityScale = 0f;
         }
+        //death object
         else if (collision.gameObject.layer == 11)
         {
             isDead = true;
