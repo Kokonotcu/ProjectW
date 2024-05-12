@@ -16,7 +16,7 @@ public class characterMovement : MonoBehaviour
     private bool isDead = false;
 
     [SerializeField]
-    private Rigidbody2D rb;
+    public Rigidbody2D rb;
     [SerializeField]
     private Transform groundCheck;
 
