@@ -10,29 +10,32 @@ public class GameManager : MonoBehaviour
 	[SerializeField]
 	cursorScript cursor;
 	[SerializeField]
-	InstantiateObjects ins;
-	[SerializeField]
-	Tilemap tilemap;
-	[SerializeField]
-	TileBase denemetilebase;
+	List<InstantiateObjects> allInstances;
 
-	Collider2D other;
+	Collider2D other, another;
 
-	List<CardManager> allCards;
-	List<GameObject> allDecks;
+	List<List<CardManager>> allCards = new List<List<CardManager>>() ;
+	List<List<GameObject>> allDecks = new List<List<GameObject>>(); 
 
 	private void Awake()
 	{
-		allCards = ins.GetReferenceToCards();
-		allDecks = ins.GetReferenceToDecks();
+		for (int i = 0; i < 3; i++)
+		{
+			allCards.Add( allInstances[i].GetReferenceToCards());
+			allDecks.Add(allInstances[i].GetReferenceToDecks());
+		}
+		
 	}
 
 	void Update()
     {
 		CursorUpdate();
-		foreach (var card in allCards)
+		foreach (var cardList in allCards)
 		{
-			card.UpdateCardPos();
+			foreach (var card in cardList) 
+			{
+				card.UpdateCardPos();
+			}
 		}
     }
 
@@ -42,43 +45,64 @@ public class GameManager : MonoBehaviour
 		if (Input.GetMouseButtonDown(0))
 		{
 			cursor.SendRay(out Collider2D hit);
-			other = hit;
-			if (other != null && other.tag == "Cards")
+			another = hit;
+			if (another != null && another.tag == "Cards")
 			{
-				other.gameObject.GetComponent<CardManager>().SetTarget(cursor.transform);
+				another.gameObject.GetComponent<CardManager>().SetTarget(cursor.transform);
 			}
 		}
-		else if (Input.GetMouseButtonUp(0))
+		if (Input.GetMouseButtonUp(0))
 		{
-			if (other != null && other.tag == "Cards")
+			if (another != null && another.tag == "Cards")
 			{
-				other.GetComponent<CardManager>().SetTarget(
-					other.GetComponent<CardManager>().selfDeck.transform);
-			}
-			else if (other != null && other.tag == "Tile") 
-			{
-				Debug.Log(cursor.GetTileAt(tilemap));
-				cursor.SetTileAt(tilemap,denemetilebase);
+				Debug.Log("a");
+				var cm = another.GetComponent<CardManager>();
+				if (cursor.collidingDeck != null && cursor.collidingDeck.gameObject != cm.selfDeck)
+				{
+					if (cursor.collidingDeck.tag == "Deck")
+					{
+						cm.SetTarget(cursor.collidingDeck.transform);
+						cm.ChangeSelfDeck(cursor.collidingDeck.gameObject);
+					}
+					else 
+					{
+						cm.SetTarget(cursor.collidingDeck.transform);
+						cm.ChangeSelfDeck(cursor.collidingDeck.gameObject);
+						SentToViewport(another);
+					}
+				}
+				else
+				{
+
+					cm.SetTarget(cm.selfDeck.transform);
+				}
 			}
 		}
-		else 
+		else
 		{
-			if (other != null && other.tag == "Cards")
+			cursor.SendRay(out Collider2D hit);
+			if (other != null && hit != null && other.tag == "Cards" && other.gameObject != hit.gameObject)
 			{
-				other.gameObject.transform.localScale = new Vector3(1f, 1f, 1f);
+				var trans = other.gameObject.transform;
+				trans.localScale = new Vector3(1f, 1f, 1f);
 				other.GetComponent<SpriteRenderer>().sortingOrder = 1;
 			}
-			cursor.SendRay(out Collider2D hit);
-			other = hit;
-			if (hit != null && (hit.tag == "Cards")) 
+			
+			if (hit != null && (hit.tag == "Cards"))
 			{
-				hit.gameObject.transform.localScale += new Vector3(0.2f,0.2f,0.2f);
-				other.GetComponent<SpriteRenderer>().sortingOrder = 2;
+				
+				hit.gameObject.transform.localScale = new Vector3(1.2f, 1.2f, 1.2f);
+				hit.GetComponent<SpriteRenderer>().sortingOrder = 2;
 			}
-		}
+			other = hit;
 
+		}
 
 	}
 
+	public void SentToViewport(Collider2D sentObj) 
+	{
+
+	}
 
 }

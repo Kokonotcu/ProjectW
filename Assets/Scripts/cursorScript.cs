@@ -8,6 +8,7 @@ using UnityEngine.Tilemaps;
 public class cursorScript : MonoBehaviour
 {
     Vector3 cursorPosition;
+	public Collider2D collidingDeck;
 
 	public void SetCursorPos()
 	{
@@ -26,15 +27,23 @@ public class cursorScript : MonoBehaviour
 		hit1 = hit.collider;
 	}
 
-	public TileBase GetTileAt(Tilemap map) 
+
+	private void OnTriggerEnter2D(Collider2D collision)
 	{
-		return map.GetTile(Vector3Int.FloorToInt( transform.position));
+		if (collision.tag == "Deck" || collision.tag == "Viewport")
+		{
+			Debug.Log(collision.name);
+			collidingDeck = collision;
+		}
 	}
 
-	public void SetTileAt(Tilemap map, TileBase block) 
+	private void OnTriggerExit2D(Collider2D collision)
 	{
-		map.GetComponentInParent<Grid>().cellSize = new Vector3(1, 1, 0);
-		map.SetTile(Vector3Int.FloorToInt( transform.position),null);
-		
+		//if (collision.tag == "Deck")
+		//{
+		//	Debug.Log("null");
+		//	collidingDeck = null;
+		//}
 	}
+
 }

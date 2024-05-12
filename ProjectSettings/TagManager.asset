@@ -8,6 +8,8 @@ TagManager:
   - Platform
   - Climable
   - Tile
+  - Deck
+  - Viewport
   layers:
   - Default
   - TransparentFX

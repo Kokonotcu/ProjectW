@@ -5,6 +5,8 @@ using UnityEngine;
 public class InstantiateObjects : MonoBehaviour
 {
 	[SerializeField]
+	float spawnOffset;
+	[SerializeField]
 	GameObject cardPrefab;
 	[SerializeField]
 	GameObject deckPrefab;
@@ -26,7 +28,7 @@ public class InstantiateObjects : MonoBehaviour
 		for (int i = 0; i < cardNum; i++)
 		{
 			allDecks[i].transform.position = new Vector3(
-				i*(18.0f)/cardNum + Camera.main.transform.position.x - 7.5f,
+				i*(18.0f)/cardNum + Camera.main.transform.position.x - 7.5f + spawnOffset,
 				Camera.main.transform.position.y - 3.0f, 
 				0.0f);
 
