@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 using UnityEngine.TextCore.Text;
 
 public class CameraBehaviour : MonoBehaviour
@@ -18,6 +19,8 @@ public class CameraBehaviour : MonoBehaviour
     public GameObject HellParticle;
     public GameObject SandParticle;
     public GameObject IceParticle;
+
+    public int CheckPoint = 0;
 
     // Start is called before the first frame update
     void Start()
@@ -39,23 +42,45 @@ public class CameraBehaviour : MonoBehaviour
             //
         }
 
+        Vector3 worldPosition = Camera.main.ScreenToWorldPoint(Input.mousePosition) + new Vector3(0,0,10f);
+        Debug.Log(worldPosition);
         if (Input.GetMouseButtonDown(0))
         {
-            GameObject.Instantiate(HellParticle, GameObject.Find("character").transform.position, new Quaternion(), null);
+            Instantiate(HellParticle, worldPosition, new Quaternion(), null);
+            GameObject.Find("TileMapController").GetComponent<TileMapController>().
+                ChangeTilesWithinRadius(new Vector3Int(Mathf.FloorToInt(worldPosition.x * 2), Mathf.FloorToInt(worldPosition.y * 2), Mathf.FloorToInt(worldPosition.z)), TileMapController.CardType.Hell);
         }
         if (Input.GetMouseButtonDown(1))
         {
-            GameObject.Instantiate(SandParticle, GameObject.Find("character").transform.position, new Quaternion(), null);
+            Instantiate(IceParticle, worldPosition, new Quaternion(), null);
+            GameObject.Find("TileMapController").GetComponent<TileMapController>().
+                ChangeTilesWithinRadius(new Vector3Int(Mathf.FloorToInt(worldPosition.x * 2), Mathf.FloorToInt(worldPosition.y * 2), Mathf.FloorToInt(worldPosition.z)), TileMapController.CardType.Ice);
         }
         if (Input.GetMouseButtonDown(2))
         {
-            GameObject.Instantiate(IceParticle, GameObject.Find("character").transform.position, new Quaternion(), null);
+            Instantiate(SandParticle, worldPosition, new Quaternion(), null);
+            GameObject.Find("TileMapController").GetComponent<TileMapController>().
+                ChangeTilesWithinRadius(new Vector3Int(Mathf.FloorToInt(worldPosition.x * 2), Mathf.FloorToInt(worldPosition.y * 2), Mathf.FloorToInt(worldPosition.z)), TileMapController.CardType.Sand);
         }
+    }
+    public void RestartLevel(int levelIndex)
+    {
+        SceneManager.LoadScene("Main");
+
+        CurrentLevelIndex = levelIndex;
+        CheckPoint = levelIndex;
+
+        GameObject.Find("character").transform.position = Levels[levelIndex].transform.position;
     }
 
     public void ProceedNextLevel(int newCurrentLevelIndex)
     {
         CurrentLevelIndex = newCurrentLevelIndex;
+
+        if(newCurrentLevelIndex > CheckPoint)
+        {
+            CheckPoint = newCurrentLevelIndex;
+        }
 
         if (CurrentLevelIndex >= Levels.Count)
         {
