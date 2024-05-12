@@ -29,11 +29,17 @@ public class tileEffects : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        Vector3Int currentPosition = Vector3Int.FloorToInt(tileCheck.transform.position);
+        Vector3Int currentPosition = new Vector3Int(Mathf.FloorToInt(tileCheck.transform.position.x), Mathf.FloorToInt(tileCheck.transform.position.y), Mathf.FloorToInt(tileCheck.transform.position.z));
         debgob.transform.position = currentPosition;
 
-
-        var tile = tmap.GetTile(Vector3Int.FloorToInt(tileCheck.transform.position));
+        var tile = tmap.GetTile(currentPosition);
+        if (tile != null )
+        {
+            Debug.Log(tile.name);
+        }
+        else
+        {
+        }
 
     }
 }
