@@ -195,11 +195,11 @@ public class TileMapController : MonoBehaviour
             }
         }
     }
+}
 
-    public enum CardType
-    {
-        Sand,
-        Hell,
-        Ice
-    }
+public enum CardType
+{
+    Sand,
+    Hell,
+    Ice
 }

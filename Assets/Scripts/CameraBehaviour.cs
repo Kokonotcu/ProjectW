@@ -51,17 +51,17 @@ public class CameraBehaviour : MonoBehaviour
         if (Input.GetMouseButtonDown(0))
         {
             GameObject.Find("TileMapController").GetComponent<TileMapController>().
-                ChangeTilesWithinRadius(new Vector3Int(Mathf.FloorToInt(worldPosition.x * 2), Mathf.FloorToInt(worldPosition.y * 2), Mathf.FloorToInt(worldPosition.z)), TileMapController.CardType.Hell);
+                ChangeTilesWithinRadius(new Vector3Int(Mathf.FloorToInt(worldPosition.x * 2), Mathf.FloorToInt(worldPosition.y * 2), Mathf.FloorToInt(worldPosition.z)), CardType.Hell);
         }
         if (Input.GetMouseButtonDown(1))
         {
             GameObject.Find("TileMapController").GetComponent<TileMapController>().
-                ChangeTilesWithinRadius(new Vector3Int(Mathf.FloorToInt(worldPosition.x * 2), Mathf.FloorToInt(worldPosition.y * 2), Mathf.FloorToInt(worldPosition.z)), TileMapController.CardType.Ice);
+                ChangeTilesWithinRadius(new Vector3Int(Mathf.FloorToInt(worldPosition.x * 2), Mathf.FloorToInt(worldPosition.y * 2), Mathf.FloorToInt(worldPosition.z)), CardType.Ice);
         }
         if (Input.GetMouseButtonDown(2))
         {
             GameObject.Find("TileMapController").GetComponent<TileMapController>().
-                ChangeTilesWithinRadius(new Vector3Int(Mathf.FloorToInt(worldPosition.x * 2), Mathf.FloorToInt(worldPosition.y * 2), Mathf.FloorToInt(worldPosition.z)), TileMapController.CardType.Sand);
+                ChangeTilesWithinRadius(new Vector3Int(Mathf.FloorToInt(worldPosition.x * 2), Mathf.FloorToInt(worldPosition.y * 2), Mathf.FloorToInt(worldPosition.z)), CardType.Sand);
         }
         if (Input.GetMouseButtonDown(3))
         {
