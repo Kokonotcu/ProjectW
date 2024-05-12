@@ -89,7 +89,7 @@ public class CameraBehaviour : MonoBehaviour
     public void RestartLevel()
     {
         int levelIndex = CurrentLevelIndex;
-        SceneManager.LoadScene("Main", LoadSceneMode.Single);
+        SceneManager.LoadScene("MainForKoray", LoadSceneMode.Single);
 
         CurrentLevelIndex = levelIndex;
         CheckPoint = levelIndex;

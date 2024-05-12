@@ -32,7 +32,13 @@ public class cursorScript : MonoBehaviour
 	{
 		if (collision.tag == "Deck" || collision.tag == "Viewport")
 		{
-			//Debug.Log(collision.name);
+			collidingDeck = collision;
+		}
+	}
+	private void OnTriggerStay2D(Collider2D collision)
+	{
+		if (collision.tag == "Deck" || collision.tag == "Viewport")
+		{
 			collidingDeck = collision;
 		}
 	}
