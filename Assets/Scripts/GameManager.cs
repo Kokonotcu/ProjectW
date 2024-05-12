@@ -85,14 +85,14 @@ public class GameManager : MonoBehaviour
 			{
 				var trans = other.gameObject.transform;
 				trans.localScale = new Vector3(1f, 1f, 1f);
-				other.GetComponent<SpriteRenderer>().sortingOrder = 1;
+				other.GetComponent<SpriteRenderer>().sortingOrder = 100;
 			}
 			
 			if (hit != null && (hit.tag == "Cards"))
 			{
 				
 				hit.gameObject.transform.localScale = new Vector3(1.2f, 1.2f, 1.2f);
-				hit.GetComponent<SpriteRenderer>().sortingOrder = 2;
+				hit.GetComponent<SpriteRenderer>().sortingOrder = 200;
 			}
 			other = hit;
 

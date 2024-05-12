@@ -44,26 +44,26 @@ public class CameraBehaviour : MonoBehaviour
             //
         }
 
-        Vector3 worldPosition = Camera.main.ScreenToWorldPoint(Input.mousePosition) + new Vector3(0,0,10f);
-        Debug.Log(worldPosition);
-        if (Input.GetMouseButtonDown(0))
-        {
-            Instantiate(HellParticle, worldPosition, new Quaternion(), null);
-            GameObject.Find("TileMapController").GetComponent<TileMapController>().
-                ChangeTilesWithinRadius(new Vector3Int(Mathf.FloorToInt(worldPosition.x * 2), Mathf.FloorToInt(worldPosition.y * 2), Mathf.FloorToInt(worldPosition.z)), TileMapController.CardType.Hell);
-        }
-        if (Input.GetMouseButtonDown(1))
-        {
-            Instantiate(IceParticle, worldPosition, new Quaternion(), null);
-            GameObject.Find("TileMapController").GetComponent<TileMapController>().
-                ChangeTilesWithinRadius(new Vector3Int(Mathf.FloorToInt(worldPosition.x * 2), Mathf.FloorToInt(worldPosition.y * 2), Mathf.FloorToInt(worldPosition.z)), TileMapController.CardType.Ice);
-        }
-        if (Input.GetMouseButtonDown(2))
-        {
-            Instantiate(SandParticle, worldPosition, new Quaternion(), null);
-            GameObject.Find("TileMapController").GetComponent<TileMapController>().
-                ChangeTilesWithinRadius(new Vector3Int(Mathf.FloorToInt(worldPosition.x * 2), Mathf.FloorToInt(worldPosition.y * 2), Mathf.FloorToInt(worldPosition.z)), TileMapController.CardType.Sand);
-        }
+        //Vector3 worldPosition = Camera.main.ScreenToWorldPoint(Input.mousePosition) + new Vector3(0,0,10f);
+        //Debug.Log(worldPosition);
+        //if (Input.GetMouseButtonDown(0))
+        //{
+        //    Instantiate(HellParticle, worldPosition, new Quaternion(), null);
+        //    GameObject.Find("TileMapController").GetComponent<TileMapController>().
+        //        ChangeTilesWithinRadius(new Vector3Int(Mathf.FloorToInt(worldPosition.x * 2), Mathf.FloorToInt(worldPosition.y * 2), Mathf.FloorToInt(worldPosition.z)), TileMapController.CardType.Hell);
+        //}
+        //if (Input.GetMouseButtonDown(1))
+        //{
+        //    Instantiate(IceParticle, worldPosition, new Quaternion(), null);
+        //    GameObject.Find("TileMapController").GetComponent<TileMapController>().
+        //        ChangeTilesWithinRadius(new Vector3Int(Mathf.FloorToInt(worldPosition.x * 2), Mathf.FloorToInt(worldPosition.y * 2), Mathf.FloorToInt(worldPosition.z)), TileMapController.CardType.Ice);
+        //}
+        //if (Input.GetMouseButtonDown(2))
+        //{
+        //    Instantiate(SandParticle, worldPosition, new Quaternion(), null);
+        //    GameObject.Find("TileMapController").GetComponent<TileMapController>().
+        //        ChangeTilesWithinRadius(new Vector3Int(Mathf.FloorToInt(worldPosition.x * 2), Mathf.FloorToInt(worldPosition.y * 2), Mathf.FloorToInt(worldPosition.z)), TileMapController.CardType.Sand);
+        //}
     }
     public void RestartLevel()
     {
