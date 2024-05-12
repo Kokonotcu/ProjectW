@@ -54,6 +54,7 @@ MonoBehaviour:
   - {fileID: 3165513595625825692}
   - {fileID: 1961423976762437408}
   - {fileID: 3641162195728140912}
+  spawnOffset: {x: 2, y: -5}
 --- !u!114 &3165513595625825692
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -66,7 +67,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 493094eca89fd2a4ebc244be78b8be87, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  spawnOffset: 4
+  spawnOffset: {x: 0, y: -2}
+  deckOffset: 4
   cardPrefab: {fileID: 8978959159459344385, guid: d92302a939324ad4c986493f42445b92, type: 3}
   deckPrefab: {fileID: 859372118909573156, guid: 53dca97b555f6c643ae6426487493c30, type: 3}
   allCards: []
@@ -84,7 +86,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 493094eca89fd2a4ebc244be78b8be87, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  spawnOffset: 8
+  spawnOffset: {x: 0, y: -2}
+  deckOffset: 8
   cardPrefab: {fileID: 8978959159459344385, guid: 9295d0dd6b6727b448e9e2af65a46e75, type: 3}
   deckPrefab: {fileID: 859372118909573156, guid: 53dca97b555f6c643ae6426487493c30, type: 3}
   allCards: []
@@ -102,7 +105,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 493094eca89fd2a4ebc244be78b8be87, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  spawnOffset: 12
+  spawnOffset: {x: 0, y: -2}
+  deckOffset: 12
   cardPrefab: {fileID: 8978959159459344385, guid: f5d6826303cf4404997397e791c5ac2d, type: 3}
   deckPrefab: {fileID: 859372118909573156, guid: 53dca97b555f6c643ae6426487493c30, type: 3}
   allCards: []

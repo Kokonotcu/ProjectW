@@ -223,14 +223,6 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
-    - target: {fileID: 1961423976762437408, guid: a81bf8474f1bbe7438bc2d0642e11fbe, type: 3}
-      propertyPath: deckOffset
-      value: 8
-      objectReference: {fileID: 0}
-    - target: {fileID: 1961423976762437408, guid: a81bf8474f1bbe7438bc2d0642e11fbe, type: 3}
-      propertyPath: spawnOffset.y
-      value: -2
-      objectReference: {fileID: 0}
     - target: {fileID: 2330383932618733758, guid: a81bf8474f1bbe7438bc2d0642e11fbe, type: 3}
       propertyPath: m_LocalPosition.x
       value: 17.18
@@ -274,34 +266,6 @@ PrefabInstance:
     - target: {fileID: 3061457702956778807, guid: a81bf8474f1bbe7438bc2d0642e11fbe, type: 3}
       propertyPath: m_Name
       value: GAMEMANAGER
-      objectReference: {fileID: 0}
-    - target: {fileID: 3165513595625825692, guid: a81bf8474f1bbe7438bc2d0642e11fbe, type: 3}
-      propertyPath: deckOffset
-      value: 4
-      objectReference: {fileID: 0}
-    - target: {fileID: 3165513595625825692, guid: a81bf8474f1bbe7438bc2d0642e11fbe, type: 3}
-      propertyPath: spawnOffset.x
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 3165513595625825692, guid: a81bf8474f1bbe7438bc2d0642e11fbe, type: 3}
-      propertyPath: spawnOffset.y
-      value: -2
-      objectReference: {fileID: 0}
-    - target: {fileID: 3641162195728140912, guid: a81bf8474f1bbe7438bc2d0642e11fbe, type: 3}
-      propertyPath: deckOffset
-      value: 12
-      objectReference: {fileID: 0}
-    - target: {fileID: 3641162195728140912, guid: a81bf8474f1bbe7438bc2d0642e11fbe, type: 3}
-      propertyPath: spawnOffset.y
-      value: -2
-      objectReference: {fileID: 0}
-    - target: {fileID: 4030093786081040837, guid: a81bf8474f1bbe7438bc2d0642e11fbe, type: 3}
-      propertyPath: spawnOffset.x
-      value: 2
-      objectReference: {fileID: 0}
-    - target: {fileID: 4030093786081040837, guid: a81bf8474f1bbe7438bc2d0642e11fbe, type: 3}
-      propertyPath: spawnOffset.y
-      value: -5
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
