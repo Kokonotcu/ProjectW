@@ -16,6 +16,10 @@ public class TileMapController : MonoBehaviour
     public List<Tile> sandTiles;
     public List<Tile> IceTiles;
 
+    public GameObject HellParticle;
+    public GameObject IceParticle;
+    public GameObject SandParticle;
+
     public enum CardType
     {
         Hell,
@@ -31,7 +35,18 @@ public class TileMapController : MonoBehaviour
             for (int y = -radius; y <= radius; y++)
             {
                 Vector3Int currentPosition = new Vector3Int(position.x + x, position.y + y, position.z);
+                switch (type)
+                {
+                    case CardType.Hell:
+                        break;
 
+                    case CardType.Sand:
+                        break;
+
+                    case CardType.Ice:
+                        break;
+
+                }
                 // Check if the tile is within the specified radius
                 if (Vector3Int.Distance(currentPosition, position) <= radius)
                 {
@@ -49,12 +64,18 @@ public class TileMapController : MonoBehaviour
                         {
                             case CardType.Hell:
                                 tileMapBase.SetTile(currentPosition, hellTiles[index]);
+                                Instantiate(HellParticle, currentPosition / 2, new Quaternion(), null);
+
                                 break;
                             case CardType.Sand:
                                 tileMapBase.SetTile(currentPosition, sandTiles[index]);
+                                Instantiate(SandParticle, currentPosition / 2, new Quaternion(), null);
+
                                 break;
                             case CardType.Ice:
                                 tileMapBase.SetTile(currentPosition, IceTiles[index]);
+                                Instantiate(IceParticle, currentPosition / 2, new Quaternion(), null);
+
                                 break;
                         }
                     }
@@ -65,15 +86,18 @@ public class TileMapController : MonoBehaviour
                         switch (type)
                         {
                             case CardType.Hell:
+                                Instantiate(HellParticle, currentPosition / 2, new Quaternion(), null);
 
                                 collidersTileMap.SetTile(currentPosition, hellTiles[index]);
                                 break;
                             case CardType.Sand:
                                 collidersTileMap.SetTile(currentPosition, sandTiles[index]);
+                                Instantiate(SandParticle, currentPosition / 2, new Quaternion(), null);
 
                                 break;
                             case CardType.Ice:
                                 collidersTileMap.SetTile(currentPosition, IceTiles[index]);
+                                Instantiate(IceParticle, currentPosition / 2, new Quaternion(), null);
 
                                 break;
                         }
@@ -84,15 +108,18 @@ public class TileMapController : MonoBehaviour
                         switch (type)
                         {
                             case CardType.Hell:
+                                Instantiate(HellParticle, currentPosition / 2, new Quaternion(), null);
 
                                 bgTileMap.SetTile(currentPosition, hellTiles[index]);
                                 break;
                             case CardType.Sand:
+                                Instantiate(SandParticle, currentPosition / 2, new Quaternion(), null);
 
                                 bgTileMap.SetTile(currentPosition, sandTiles[index]);
                                 break;
                             case CardType.Ice:
                                 bgTileMap.SetTile(currentPosition, IceTiles[index]);
+                                Instantiate(IceParticle, currentPosition / 2, new Quaternion(), null);
 
                                 break;
                         }
@@ -103,15 +130,18 @@ public class TileMapController : MonoBehaviour
                         switch (type)
                         {
                             case CardType.Hell:
+                                Instantiate(HellParticle, currentPosition / 2, new Quaternion(), null);
 
                                 bg2TileMap.SetTile(currentPosition, hellTiles[index]);
                                 break;
                             case CardType.Sand:
                                 bg2TileMap.SetTile(currentPosition, sandTiles[index]);
+                                Instantiate(SandParticle, currentPosition / 2, new Quaternion(), null);
 
                                 break;
                             case CardType.Ice:
                                 bg2TileMap.SetTile(currentPosition, IceTiles[index]);
+                                Instantiate(IceParticle, currentPosition / 2, new Quaternion(), null);
 
                                 break;
                         }

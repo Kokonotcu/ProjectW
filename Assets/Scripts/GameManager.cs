@@ -106,7 +106,28 @@ public class GameManager : MonoBehaviour
 
 	public void SentToViewport(Collider2D sentObj) 
 	{
+        Vector3 worldPosition = Camera.main.ScreenToWorldPoint(Input.mousePosition) + new Vector3(0, 0, 10f);
+        
 
-	}
+		switch(sentObj.gameObject.name)
+		{
+			case "Hell":
+                GameObject.Find("TileMapController").GetComponent<TileMapController>().
+					ChangeTilesWithinRadius(new Vector3Int(Mathf.FloorToInt(worldPosition.x * 2), Mathf.FloorToInt(worldPosition.y * 2), Mathf.FloorToInt(worldPosition.z)), TileMapController.CardType.Hell);
+                break;
+
+			case "Ice":
+                GameObject.Find("TileMapController").GetComponent<TileMapController>().
+					ChangeTilesWithinRadius(new Vector3Int(Mathf.FloorToInt(worldPosition.x * 2), Mathf.FloorToInt(worldPosition.y * 2), Mathf.FloorToInt(worldPosition.z)), TileMapController.CardType.Ice);
+				break;
+
+			case "Sand":
+                GameObject.Find("TileMapController").GetComponent<TileMapController>().
+					ChangeTilesWithinRadius(new Vector3Int(Mathf.FloorToInt(worldPosition.x * 2), Mathf.FloorToInt(worldPosition.y * 2), Mathf.FloorToInt(worldPosition.z)), TileMapController.CardType.Sand);
+				break;
+        }
+
+		Destroy(sentObj.gameObject);
+    }
 
 }
