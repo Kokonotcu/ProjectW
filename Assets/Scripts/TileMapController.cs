@@ -20,11 +20,56 @@ public class TileMapController : MonoBehaviour
     public GameObject IceParticle;
     public GameObject SandParticle;
 
-    public enum CardType
+
+    public List<GameObject> Scene1 = new List<GameObject>();
+    public List<GameObject> Scene2 = new List<GameObject>();
+    public List<GameObject> Scene3 = new List<GameObject>();
+    public List<GameObject> Scene4 = new List<GameObject>();
+
+    public int index;
+    public int index2;
+    public int index3;
+    public int index4;
+    
+
+    public IEnumerator RunScenes(float delayTime)
     {
-        Hell,
-        Sand,
-        Ice
+        //Wait for the specified delay time before continuing.
+
+        switch (Camera.main.GetComponent<CameraBehaviour>().CurrentLevelIndex)
+        {
+            case 7:
+                for (int i = 0; i < Scene1.Count; i++)
+                {
+                    ChangeTilesWithinRadius(new Vector3Int(Mathf.FloorToInt(Scene1[i].transform.position.x * 2), Mathf.FloorToInt(Scene1[i].transform.position.y * 2), Mathf.FloorToInt(Scene1[i].transform.position.z)), (CardType)Random.Range(0, 3));
+                    yield return new WaitForSeconds(delayTime);
+                }
+                break;
+            case 8:
+                for (int i = 0; i < Scene2.Count; i++)
+                {
+                    ChangeTilesWithinRadius(new Vector3Int(Mathf.FloorToInt(Scene2[i].transform.position.x * 2), Mathf.FloorToInt(Scene2[i].transform.position.y * 2), Mathf.FloorToInt(Scene2[i].transform.position.z)), (CardType)Random.Range(0, 3));
+                    yield return new WaitForSeconds(delayTime);
+                }
+                break;
+            case 9:
+                for (int i = 0; i < Scene3.Count; i++)
+                {
+                    ChangeTilesWithinRadius(new Vector3Int(Mathf.FloorToInt(Scene3[i].transform.position.x * 2), Mathf.FloorToInt(Scene3[i].transform.position.y * 2), Mathf.FloorToInt(Scene3[i].transform.position.z)), (CardType)Random.Range(0, 3));
+                    yield return new WaitForSeconds(delayTime);
+                }
+                break;
+            case 10:
+                for (int i = 0; i < Scene4.Count; i++)
+                {
+                    ChangeTilesWithinRadius(new Vector3Int(Mathf.FloorToInt(Scene4[i].transform.position.x * 2), Mathf.FloorToInt(Scene4[i].transform.position.y * 2), Mathf.FloorToInt(Scene4[i].transform.position.z)), (CardType)Random.Range(0,1));
+                    yield return new WaitForSeconds(delayTime);
+                }
+
+                break;
+        }
+
+        //Do the action after the delay time has finished.
     }
 
     // Function to change tiles within a given radius
@@ -149,5 +194,12 @@ public class TileMapController : MonoBehaviour
                 }
             }
         }
+    }
+
+    public enum CardType
+    {
+        Sand,
+        Hell,
+        Ice
     }
 }
