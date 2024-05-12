@@ -146,3 +146,4 @@ MonoBehaviour:
   target: {fileID: 8749806997703577066, guid: 53dca97b555f6c643ae6426487493c30, type: 3}
   cardSnapSpeed: 15
   selfDeck: {fileID: 0}
+  cardType: 0

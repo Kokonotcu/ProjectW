@@ -4,8 +4,9 @@ using UnityEngine;
 
 public class InstantiateObjects : MonoBehaviour
 {
-	[SerializeField]
-	float spawnOffset;
+	public Vector2 spawnOffset;
+	public float deckOffset;
+
 	[SerializeField]
 	GameObject cardPrefab;
 	[SerializeField]
@@ -14,8 +15,9 @@ public class InstantiateObjects : MonoBehaviour
 	List<CardManager> allCards = new List<CardManager>();
 	[SerializeField]
 	List<GameObject> allDecks = new List<GameObject>();
-	[SerializeField]
-	float cardNum = 1;
+
+
+	public float cardNum = 1;
 
 	private void Awake()
 	{
@@ -28,8 +30,8 @@ public class InstantiateObjects : MonoBehaviour
 		for (int i = 0; i < cardNum; i++)
 		{
 			allDecks[i].transform.position = new Vector3(
-				i*(18.0f)/cardNum + Camera.main.transform.position.x - 7.5f + spawnOffset,
-				Camera.main.transform.position.y - 3.0f, 
+				i*(18.0f)/cardNum + Camera.main.transform.position.x - 7.5f + spawnOffset.x+ deckOffset,
+				Camera.main.transform.position.y - 3.0f+ spawnOffset.y, 
 				0.0f);
 
 			allCards[i].SetTarget(allDecks[i].transform);
@@ -52,10 +54,23 @@ public class InstantiateObjects : MonoBehaviour
 		for (int i = 0; i < cardNum; i++)
 		{
 			allDecks[i].transform.position = new Vector3(
-				i * (18.0f) / cardNum + Camera.main.transform.position.x - 7.5f + spawnOffset,
-				Camera.main.transform.position.y - 3.0f,
+				i * (18.0f) / cardNum + Camera.main.transform.position.x - 7.5f + spawnOffset.x + deckOffset,
+				Camera.main.transform.position.y - 3.0f + spawnOffset.y,
 				0.0f);
 		}
+	}
+
+	public GameObject SpawnNewCard() 
+	{
+		var card = Instantiate(cardPrefab).GetComponent<CardManager>();
+		var deck = Instantiate(deckPrefab);
+		allCards.Add(card);
+		allDecks.Add(deck);
+
+		card.SetTarget(deck.transform);
+		card.selfDeck = deck;
+
+		return card.gameObject;
 	}
 
 }

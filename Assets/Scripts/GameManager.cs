@@ -1,6 +1,7 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.Xml.Serialization;
 using UnityEngine;
 using UnityEngine.Tilemaps;
 using static cursorScript;
@@ -11,6 +12,8 @@ public class GameManager : MonoBehaviour
 	cursorScript cursor;
 	[SerializeField]
 	List<InstantiateObjects> allInstances;
+	int TotalCardsInScene = 0;
+	public Vector2 spawnOffset = new Vector2(0,-2.0f);
 
 	Collider2D other, another;
 
@@ -23,6 +26,7 @@ public class GameManager : MonoBehaviour
 		{
 			allCards.Add( allInstances[i].GetReferenceToCards());
 			allDecks.Add(allInstances[i].GetReferenceToDecks());
+			TotalCardsInScene +=  allCards[i].Count;
 		}
 		
 	}
@@ -30,10 +34,12 @@ public class GameManager : MonoBehaviour
 	void Update()
     {
 		CursorUpdate();
-		for (int i = 0;i < 3;i++) 
-		{
-			allInstances[i].UpdateDeckPos();
-		}
+		//update deck pos old fashioned
+		//for (int i = 0;i < 3;i++) 
+		//{
+		//	allInstances[i].UpdateDeckPos();
+		//}
+		UpdateDeckPos();
 		foreach (var cardList in allCards)
 		{
 			foreach (var card in cardList) 
@@ -127,7 +133,74 @@ public class GameManager : MonoBehaviour
 				break;
         }
 
-		Destroy(sentObj.gameObject);
-    }
+		//DestroySafely(sentObj.gameObject);
+		//ResetCards();
+		//SpawnSafely(CardType.Sand);
+		//SpawnSafely(CardType.Hell);
+		//SpawnSafely(CardType.Ice);
+	}
 
+	public void DestroySafely(GameObject sentObj) 
+	{
+		int listNum = 0;
+		int cardIndex = 0;
+		foreach (var cardList in allCards)
+		{
+			var cm = sentObj.GetComponent<CardManager>();
+			if (cardList.Contains(cm))
+			{
+				cardIndex = cardList.IndexOf(cm);
+				cardList.Remove(cm);
+				Destroy(cm.gameObject);
+				break;
+			}
+			listNum++;
+		}
+
+		allInstances[listNum].cardNum -= 1;
+		GameObject deck = allDecks[listNum][cardIndex];
+		allDecks[listNum].Remove(deck);
+		Destroy(deck);
+		TotalCardsInScene--;
+	}
+
+	public void ResetCards() 
+	{
+		foreach (var cardList in allCards)
+		{
+			for (int i = 0; i<cardList.Count; i++)
+			{
+				DestroySafely(cardList[i].gameObject);
+			}
+		}
+		TotalCardsInScene = 0;
+	}
+
+	public GameObject SpawnSafely(CardType type) 
+	{
+		GameObject card = allInstances[(int)type].SpawnNewCard();
+		allInstances[(int)type].cardNum++;
+		TotalCardsInScene++;
+		//allCards[]
+		//Instantiate();
+
+		return card;
+	}
+
+	public void UpdateDeckPos() 
+	{
+		int i = 0;
+		foreach (var deckLists in allDecks)
+		{
+			foreach (var deck in deckLists)
+			{
+				deck.transform.position = new Vector3(
+				(Camera.main.transform.position.x -10.0f) + 20.0f /(TotalCardsInScene+1)*(i+1),
+				Camera.main.transform.position.y + spawnOffset.y,
+				0.0f);
+
+				i++;
+			}
+		}
+	}
 }

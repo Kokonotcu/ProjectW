@@ -13,7 +13,7 @@ GameObject:
   - component: {fileID: 4216061775174064736}
   - component: {fileID: 8870232700712459669}
   m_Layer: 6
-  m_Name: Ice
+  m_Name: Hell
   m_TagString: Cards
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -75,7 +75,7 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 100
-  m_Sprite: {fileID: 21300000, guid: 815747589a45cc148a063a78f968af8d, type: 3}
+  m_Sprite: {fileID: 21300000, guid: c4f275e8aa603254ab6abac6f8fa5896, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
@@ -122,7 +122,7 @@ BoxCollider2D:
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0.5, y: 0.5}
-    oldSize: {x: 3.14, y: 4.41}
+    oldSize: {x: 3.03, y: 4.37}
     newSize: {x: 1, y: 1}
     adaptiveTilingThreshold: 0.5
     drawMode: 0
@@ -146,3 +146,4 @@ MonoBehaviour:
   target: {fileID: 8749806997703577066, guid: 53dca97b555f6c643ae6426487493c30, type: 3}
   cardSnapSpeed: 15
   selfDeck: {fileID: 0}
+  cardType: 1

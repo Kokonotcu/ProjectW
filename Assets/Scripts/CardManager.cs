@@ -5,10 +5,11 @@ using UnityEngine;
 
 public class CardManager : MonoBehaviour
 {
-    public Transform target;
-    [SerializeField]
-    float cardSnapSpeed;
-    public GameObject selfDeck;
+	public Transform target;
+	[SerializeField]
+	float cardSnapSpeed;
+	public GameObject selfDeck;
+	public CardType cardType;
 
 	private void Start()
 	{
